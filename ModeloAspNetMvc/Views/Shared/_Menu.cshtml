@@ -1,0 +1,53 @@
+﻿<header class="site-header">
+	<div class="container-fluid">
+		<a href="#" class="site-logo">
+			<img class="hidden-md-down" src="~/Content/img/logo-2.png" alt="">
+		</a>
+		<button id="show-hide-sidebar-toggle" class="show-hide-sidebar">
+			<span>toggle menu</span>
+		</button>
+		<div class="site-header-content">
+			<div class="site-header-content-in pull-right">
+				<div class="site-header-show">
+					<div class="dropdown user-menu">
+						<button class="dropdown-toggle" id="dd-user-menu" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<img src="~/Content/img/avatar-2-64.png" alt="">
+						</button>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd-user-menu">
+							@*<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-user"></span>Profile</a>
+								<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-cog"></span>Settings</a>
+								<a class="dropdown-item" href="#"><span class="font-icon glyphicon glyphicon-question-sign"></span>Help</a>
+								<div class="dropdown-divider"></div>*@
+							<a class="dropdown-item" href="/Account/LogOff"><span class="font-icon glyphicon glyphicon-log-out"></span>Logout</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<div class="mobile-menu-left-overlay"></div>
+
+<nav class="side-menu">
+	<ul class="side-menu-list">
+		<li class="brown opened">
+			<a href="/Dashboard/Index">
+				<i class="font-icon font-icon-chart"></i>
+				<span class="lbl">Dashboard</span>
+			</a>
+		</li>
+		<li class="purple with-sub">
+			<span>
+				<i class="font-icon font-icon-edit"></i>
+				<span class="lbl">Cadastros</span>
+			</span>
+			<ul>
+				<li><a href="/Account/Index"><span class="lbl">Usuario</span></a></li>
+				<li class="divider"></li>
+				<li><a href="/Cliente/Index"><span class="lbl">Clientes</span></a></li>
+				<li><a href="/Home/Index"><span class="lbl">Home</span></a></li>				
+			</ul>
+		</li>		
+	</ul>
+</nav><!--.side-menu-->
