@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Relatorio de Produtos";
+}
+
+<header class="section-header">
+    <div class="tbl">
+        <div class="tbl-row">
+            <div class="tbl-cell">
+                <h3>Relatório de Produtos</h3>
+                <ol class="breadcrumb breadcrumb-simple">
+                    <li><a href="#">ComFacil</a></li>
+                    <li><a href="#">Relatórios</a></li>
+                    <li class="active">Produtos</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="card box-block">
+    <div class="card-block">
+        @using (Html.BeginForm("GerarRelatorio", "Produto"))
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="submit" value="Gerar" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</section>
+

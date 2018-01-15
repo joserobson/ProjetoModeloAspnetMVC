@@ -51,6 +51,7 @@
     <Compile Include="Entities\Telefone.cs" />
     <Compile Include="Entities\TipoEndereco.cs" />
     <Compile Include="Interfaces\Repositories\IRepositoriocs.cs" />
+    <Compile Include="Interfaces\DomainServices\IDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
