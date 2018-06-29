@@ -165,6 +165,7 @@
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="AutoMapper\WebMappingProfile.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CaixaController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
@@ -173,6 +174,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ExcelExportHelper.cs" />
+    <Compile Include="Models\Caixa\FechamentoDiarioModel.cs" />
+    <Compile Include="Models\Caixa\MovimentoCaixaModel.cs" />
+    <Compile Include="Models\Caixa\TelaFechamentoDiarioModel.cs" />
     <Compile Include="Models\Produto\RelatorioProdutoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -294,6 +298,7 @@
     <Content Include="Views\Shared\_Notifications.cshtml" />
     <Content Include="Views\Cliente\Relatorio.cshtml" />
     <Content Include="Views\Produto\Relatorio.cshtml" />
+    <Content Include="Views\Caixa\FechamentoDiario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Project.Layer.App\Project.Layer.App.csproj">

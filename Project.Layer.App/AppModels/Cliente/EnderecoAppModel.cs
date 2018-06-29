@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Project.Layer.App.AppModels.Cliente
+﻿namespace Project.Layer.App.AppModels.Cliente
 {
     public class EnderecoAppModel
     {

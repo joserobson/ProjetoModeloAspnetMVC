@@ -10,6 +10,7 @@ namespace Project.Layer.App.Ioc
         public static void RegisterDependencies(Container containerToInject)
         {
             containerToInject.Register<IClienteAppService, ClienteAppService>();
+            containerToInject.Register<ICaixaAppService, CaixaAppService>();
         }
     }
 }

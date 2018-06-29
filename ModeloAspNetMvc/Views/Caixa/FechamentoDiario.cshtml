@@ -1,0 +1,171 @@
+﻿@model ModeloAspNetMvc.Models.Caixa.TelaFechamentoDiarioModel
+
+@{
+    ViewBag.Title = "FechamentoDiario";
+}
+
+
+<header class="section-header">
+    <div class="tbl">
+        <div class="tbl-row">
+            <div class="tbl-cell">
+                <h3>Caixa</h3>
+                <ol class="breadcrumb breadcrumb-simple">
+                    <li><a href="#">ComFacil</a></li>
+                    <li><a href="#">Caixa</a></li>
+                    <li class="active">Fechamento Diário</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="card box-block">
+    <div class="card-block">       
+        @using (Html.BeginForm())
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepickerDia'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FiltroReferencia)
+                        @Html.EditorFor(model => model.FiltroReferencia, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>*@
+            </div>
+
+            @*<div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FiltroPrecoDeCusto)
+                        @Html.EditorFor(model => model.FiltroPrecoDeCusto, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FiltroPrecoDeVenda)
+                        @Html.EditorFor(model => model.FiltroPrecoDeVenda, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+            </div>*@
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="submit" value="Consultar" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <section class="card">
+        <div class="card-block">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DiaFechamento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaInicioDoDia)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorEntrada)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaSaida)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaRetirada)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Saldo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Funcionario)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DinheiroEmCaixa)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model.Fechamentos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiaFechamento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CaixaInicioDoDia)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorEntrada)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorDaSaida)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ValorDaRetirada)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Saldo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </td>                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Funcionario)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DinheiroEmCaixa)
+                        </td>   
+                        <td>
+                            @Html.ActionLink("Entradas","Entradas")
+                        </td>
+                        <td>
+                            @Html.ActionLink("Saídas", "Entradas")
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </section>
+</section>
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#datetimepickerDia').datetimepicker();
+    });
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

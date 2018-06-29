@@ -48,7 +48,11 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppModels\Caixa\FechamentoDiarioAppModel.cs" />
+    <Compile Include="AppModels\Caixa\MovimentoCaixaAppModel.cs" />
+    <Compile Include="AppServices\CaixaAppService.cs" />
     <Compile Include="AppServices\ClienteAppService.cs" />
+    <Compile Include="AppServices\ICaixaAppService.cs" />
     <Compile Include="AppServices\IClienteAppService.cs" />
     <Compile Include="HttpServices\HttpServiceGlobal.cs" />
     <Compile Include="Ioc\DIContainer.cs" />
