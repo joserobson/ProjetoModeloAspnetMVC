@@ -1,8 +1,9 @@
-﻿using Project.Layer.App.Ioc;
+﻿using Project.CrossCutting.Ioc;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
 using SimpleInjector.Integration.Web.Mvc;
 using System.Reflection;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace ModeloAspNetMvc.App_Start
@@ -17,9 +18,12 @@ namespace ModeloAspNetMvc.App_Start
             InitializeContainer(DIContainer.container);
 
             DIContainer.container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
+            DIContainer.container.RegisterWebApiControllers(GlobalConfiguration.Configuration, Assembly.GetExecutingAssembly());
 
-            //DIContainer.container.Verify();
+            DIContainer.container.Verify();
+
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(DIContainer.container));
+            
         }
 
         private static void InitializeContainer(Container container)

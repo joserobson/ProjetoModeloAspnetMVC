@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using ModeloAspNetMvc.Models.Caixa;
 using Project.Layer.App.AppModels.Caixa;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace ModeloAspNetMvc.AutoMapper
 {
@@ -15,6 +11,7 @@ namespace ModeloAspNetMvc.AutoMapper
             //CreateMap<Filial, FilialView>().ReverseMap();
 
             CreateMap<FechamentoDiarioAppModel, FechamentoDiarioModel>().ReverseMap();
+            CreateMap<MovimentoCaixaAppModel, MovimentoCaixaModel>().ReverseMap();
         }
     }
 }

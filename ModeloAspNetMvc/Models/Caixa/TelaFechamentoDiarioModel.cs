@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ModeloAspNetMvc.Models.Caixa
 {
     public class TelaFechamentoDiarioModel
     {
-        public DateTime FiltroDia { get; set; }
+        
+        [Display(Name ="Dia do Fechamento")]
+        public string FiltroDia { get; set; }
 
         public IEnumerable<FechamentoDiarioModel> Fechamentos { get; set; }
 

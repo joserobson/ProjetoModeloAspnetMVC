@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace ModeloAspNetMvc.Models.Caixa
 {
     public class FechamentoDiarioModel
     {
+        public string Id { get; set; }
+
         [Display(Name ="Dia do Fechamento")]
         public string DiaFechamento { get; set; }
 

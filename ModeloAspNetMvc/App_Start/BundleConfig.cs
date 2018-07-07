@@ -15,6 +15,7 @@ namespace ModeloAspNetMvc
                      "~/Content/css/separate/blockui.min.css",
                      "~/Content/css/lib/font-awesome.min.css",
                      "~/Content/css/lib/bootstrap.min.css",
+                     "~/Content/bootstrap-datetimepicker.min.css",
                      "~/Content/css/main.css"
                      ));
 
@@ -28,8 +29,9 @@ namespace ModeloAspNetMvc
                         "~/Scripts/lib/plugins.js",
                         "~/Scripts/lib/input-mask/jquery.mask.min.js",
                         "~/Scripts/lib/input-mask/input-mask-init.js",
-                        "~/Scripts/lib/app.js",
-                        "~/Scripts/lib/blockUI/jquery.blockUI.js"));
+                        "~/Scripts/lib/app.js",                        
+                        "~/Scripts/moment.min.js",
+                        "~/Scripts/bootstrap-datetimepicker.min.js"));
         }
     }
 }

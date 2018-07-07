@@ -3,8 +3,6 @@ using ModeloAspNetMvc.Models.Caixa;
 using Project.Layer.App.AppServices;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ModeloAspNetMvc.Controllers
@@ -32,8 +30,22 @@ namespace ModeloAspNetMvc.Controllers
             return View(new TelaFechamentoDiarioModel
             {
                 Fechamentos = dados,
-                FiltroDia = DateTime.Now
+                FiltroDia = DateTime.Now.ToString("dd/MM/yyyy")
             });
+        }
+
+        public ActionResult ExibirEntradasDoDia(string id)
+        {
+            var entradas = _caixaAppService.ObterEntradasDoCaixa(id);            
+
+            return PartialView("_MovimentosDoCaixa",  Mapper.Map<IEnumerable<MovimentoCaixaModel>>(entradas));
+        }
+
+        public ActionResult ExibirSaidasDoDia(string id)
+        {
+            var saidas = _caixaAppService.ObterSaidasDoCaixa(id);            
+
+            return PartialView("_MovimentosDoCaixa", Mapper.Map<IEnumerable<MovimentoCaixaModel>>(saidas));
         }
     }
 }

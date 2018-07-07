@@ -21,43 +21,39 @@
 </header>
 
 <section class="card box-block">
-    <div class="card-block">       
+    <div class="card-block">
         @using (Html.BeginForm())
         {
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-3">
                     <div class="form-group">
-                        <div class='input-group date' id='datetimepickerDia'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
+                        @Html.LabelFor(model => model.FiltroDia)
+                        @Html.TextBox("FiltroDia", Model.FiltroDia, new { @class = "form-control", @id = "FiltroDia" })
                     </div>
                 </div>
 
                 @*<div class="col-md-6">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FiltroReferencia)
-                        @Html.EditorFor(model => model.FiltroReferencia, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>*@
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FiltroReferencia)
+                            @Html.EditorFor(model => model.FiltroReferencia, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>*@
             </div>
 
             @*<div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FiltroPrecoDeCusto)
-                        @Html.EditorFor(model => model.FiltroPrecoDeCusto, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FiltroPrecoDeCusto)
+                            @Html.EditorFor(model => model.FiltroPrecoDeCusto, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FiltroPrecoDeVenda)
-                        @Html.EditorFor(model => model.FiltroPrecoDeVenda, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FiltroPrecoDeVenda)
+                            @Html.EditorFor(model => model.FiltroPrecoDeVenda, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
@@ -68,90 +64,159 @@
         }
     </div>
 
-    <section class="card">
-        <div class="card-block">
-            <table class="table">
+    <hr />
+
+    @*<section class="card">*@
+    <div class="card-block">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DiaFechamento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaInicioDoDia)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorEntrada)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaSaida)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaRetirada)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Saldo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Funcionario)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DinheiroEmCaixa)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Fechamentos)
+            {
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DiaFechamento)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaInicioDoDia)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorEntrada)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaSaida)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaRetirada)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Saldo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Status)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Funcionario)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DinheiroEmCaixa)
-                    </th>
-                    <th></th>
-                    <th></th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiaFechamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CaixaInicioDoDia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorEntrada)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorDaSaida)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorDaRetirada)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Saldo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Funcionario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DinheiroEmCaixa)
+                    </td>
+                    <td>                        
+                        <a href="javascript:void(0);" class="anchorEntradas" data-id="@item.Id">Entradas</a>
+                    </td>
+                    <td>
+                        <a href="javascript:void(0);" class="anchorSaidas" data-id="@item.Id">Saídas</a>
+                    </td>
                 </tr>
+            }
 
-                @foreach (var item in Model.Fechamentos)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DiaFechamento)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CaixaInicioDoDia)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ValorEntrada)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ValorDaSaida)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ValorDaRetirada)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Saldo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Status)
-                        </td>                        
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Funcionario)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DinheiroEmCaixa)
-                        </td>   
-                        <td>
-                            @Html.ActionLink("Entradas","Entradas")
-                        </td>
-                        <td>
-                            @Html.ActionLink("Saídas", "Entradas")
-                        </td>
-                    </tr>
-                }
-
-            </table>
-        </div>
-    </section>
+        </table>
+    </div>
+    @*</section>*@
 </section>
+
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
 
 <script type="text/javascript">
 
+    const urlExibirEntradas = '/Caixa/ExibirEntradasDoDia';
+    const urlExibirSaidas = '/Caixa/ExibirSaidasDoDia';
+
+
     $(function () {
-        $('#datetimepickerDia').datetimepicker();
+
+        $(".anchorEntradas").click(function () {
+            //debugger;
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: urlExibirEntradas,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                success: function (data) {
+                   // debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });      
+
+
+        $(".anchorSaidas").click(function () {
+           // debugger;
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: urlExibirSaidas,
+                contentType: "application/json; charset=utf-8",
+                data: { "Id": id },
+                datatype: "json",
+                success: function (data) {
+                   // debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        }); 
+
+        //$("#closbtn").click(function () {
+        //    $('#myModal').modal('hide');
+        //});
     });
+
 
 </script>
 
