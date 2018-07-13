@@ -13,7 +13,7 @@ namespace Project.Layer.Domain.Entities
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public bool Excluido { get; set; }
+        //public bool Excluido { get; set; }
 
          
     }

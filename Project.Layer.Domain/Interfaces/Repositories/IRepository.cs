@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Project.Layer.Domain.Interfaces.Repositories
 {
-    public interface IRepositorio<TEntity> where TEntity : class
+    public interface IRepository<TEntity> where TEntity : class
     {
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> Get(Func<TEntity, bool> predicate);

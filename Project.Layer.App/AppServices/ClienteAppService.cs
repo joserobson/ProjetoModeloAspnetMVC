@@ -1,5 +1,5 @@
-﻿using ComFacil.FrenteCaixa.Common.HelperHttpService;
-using Project.Layer.App.AppModels.Cliente;
+﻿using Project.Layer.App.AppModels.Cliente;
+using Project.Layer.App.Helper;
 using Project.Layer.App.HttpServices;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +15,7 @@ namespace Project.Layer.App.AppServices
 
             if (!httpResponse.IsSuccessStatusCode)
             {
-                var erro = HelperHttpService.ObterMensagemHttpResponse(httpResponse);
+                var erro = HttpServiceHelper.ObterMensagemHttpResponse(httpResponse);
                 throw new System.Exception(erro);
             }
 

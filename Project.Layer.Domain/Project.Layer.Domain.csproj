@@ -42,15 +42,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Caixa.cs" />
     <Compile Include="Entities\Cidade.cs" />
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\Endereco.cs" />
     <Compile Include="Entities\Estado.cs" />
+    <Compile Include="Entities\MovimentoDoCaixa.cs" />
     <Compile Include="Entities\Operadora.cs" />
     <Compile Include="Entities\Pais.cs" />
     <Compile Include="Entities\Telefone.cs" />
     <Compile Include="Entities\TipoEndereco.cs" />
-    <Compile Include="Interfaces\Repositories\IRepositoriocs.cs" />
+    <Compile Include="Enums\ETipoMovimentoCaixa.cs" />
+    <Compile Include="Interfaces\Repositories\ICaixaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IRepository.cs" />
     <Compile Include="Interfaces\DomainServices\IDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

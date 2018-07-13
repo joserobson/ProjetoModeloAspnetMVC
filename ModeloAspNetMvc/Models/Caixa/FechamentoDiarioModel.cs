@@ -5,12 +5,12 @@ namespace ModeloAspNetMvc.Models.Caixa
 {
     public class FechamentoDiarioModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
-        [Display(Name ="Dia do Fechamento")]
+        [Display(Name ="Data")]
         public string DiaFechamento { get; set; }
 
-        [Display(Name = "Caixa Início do Dia")]
+        [Display(Name = "Início do Dia")]
         public string CaixaInicioDoDia { get; set; }
 
         [Display(Name = "Entrada")]
@@ -28,8 +28,8 @@ namespace ModeloAspNetMvc.Models.Caixa
         [Display(Name = "Funcionário")]
         public string Funcionario { get; set; }
 
-        [Display(Name = "Caixa Final do Dia")]
-        public string DinheiroEmCaixa { get; set; }
+        [Display(Name = "Final do Dia")]
+        public string CaixaFinalDoDia { get; set; }
 
         [Display(Name = "Saldo")]
         public string Saldo { get; set; }

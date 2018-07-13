@@ -4,6 +4,8 @@
     ViewBag.Title = "FechamentoDiario";
 }
 
+@using PagedList.Mvc;
+@using PagedList;
 
 <header class="section-header">
     <div class="tbl">
@@ -22,7 +24,7 @@
 
 <section class="card box-block">
     <div class="card-block">
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("FechamentoDiario", "Caixa", FormMethod.Get, new { @id = "formPesquisaPedido" }))
         {
             <div class="row">
                 <div class="col-md-3">
@@ -32,6 +34,21 @@
                     </div>
                 </div>
 
+                <div class="col-md-9 text-right">
+                    <div class="form-group">
+                        <input type="submit" value="Consultar" class="btn btn-primary" />
+                    </div>
+                </div>
+
+                @*<div class="form-group">
+                    <div class="input-group date" data-provide="datepicker">
+                        @Html.TextBox("FiltroDia", Model.FiltroDia, new { @class = "form-control", @id = "FiltroDia" })
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
+                    </div>*@
+
                 @*<div class="col-md-6">
                         <div class="form-group">
                             @Html.LabelFor(model => model.FiltroReferencia)
@@ -40,69 +57,54 @@
                     </div>*@
             </div>
 
-            @*<div class="row">
-                    <div class="col-md-3">
+            @*<div class="row text-right">
+                    <div class="col-md-12">
                         <div class="form-group">
-                            @Html.LabelFor(model => model.FiltroPrecoDeCusto)
-                            @Html.EditorFor(model => model.FiltroPrecoDeCusto, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.FiltroPrecoDeVenda)
-                            @Html.EditorFor(model => model.FiltroPrecoDeVenda, new { htmlAttributes = new { @class = "form-control" } })
+                            <input type="submit" value="Consultar" class="btn btn-primary" />
                         </div>
                     </div>
                 </div>*@
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <input type="submit" value="Consultar" class="btn btn-primary" />
-                    </div>
-                </div>
-            </div>
         }
     </div>
 
-    <hr />
-
     @*<section class="card">*@
     <div class="card-block">
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DiaFechamento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaInicioDoDia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorEntrada)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaSaida)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaRetirada)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Saldo)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Status)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Funcionario)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DinheiroEmCaixa)
-                </th>
-                <th></th>
-                <th></th>
-            </tr>
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr class="table-info">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DiaFechamento)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaInicioDoDia)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaFinalDoDia)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorEntrada)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaSaida)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Saldo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaRetirada)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Funcionario)
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
 
-            @foreach (var item in Model.Fechamentos)
-            {
+                @foreach (var item in Model.Fechamentos)
+                {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.DiaFechamento)
@@ -111,13 +113,13 @@
                         @Html.DisplayFor(modelItem => item.CaixaInicioDoDia)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.CaixaFinalDoDia)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.ValorEntrada)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ValorDaSaida)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ValorDaRetirada)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Saldo)
@@ -126,23 +128,25 @@
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.ValorDaRetirada)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Funcionario)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.DinheiroEmCaixa)
-                    </td>
-                    <td>                        
                         <a href="javascript:void(0);" class="anchorEntradas" data-id="@item.Id">Entradas</a>
                     </td>
                     <td>
                         <a href="javascript:void(0);" class="anchorSaidas" data-id="@item.Id">Saídas</a>
                     </td>
                 </tr>
-            }
-
-        </table>
+                }
+            </table>
+        </div>
+        <div class="pager">
+            @Html.PagedListPager((IPagedList)Model.Fechamentos, page => Url.Action("FechamentoDiario", new { page }))
+        </div>
     </div>
-    @*</section>*@
 </section>
 
 
@@ -154,17 +158,27 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
 
-    const urlExibirEntradas = '/Caixa/ExibirEntradasDoDia';
-    const urlExibirSaidas = '/Caixa/ExibirSaidasDoDia';
+
+    const urlExibirEntradas = '@Url.Action("ExibirEntradasDoDia")';
+    const urlExibirSaidas = '@Url.Action("ExibirSaidasDoDia")';
 
 
     $(function () {
 
+        $("#formPesquisaPedido").submit(function (e) {
+            $("#loadingDiv").show();
+        });
+
+        $('#FiltroDia').datepicker({
+            language: "pt-BR"
+        });
+
+
         $(".anchorEntradas").click(function () {
             //debugger;
+            $("#loadingDiv").show();
             var $buttonClicked = $(this);
             var id = $buttonClicked.attr('data-id');
             var options = { "backdrop": "static", keyboard: true };
@@ -176,20 +190,26 @@
                 datatype: "json",
                 success: function (data) {
                    // debugger;
+                    $("#loadingDiv").hide();
+
                     $('#myModalContent').html(data);
                     $('#myModal').modal(options);
                     $('#myModal').modal('show');
 
                 },
                 error: function () {
+                    $("#loadingDiv").hide();
+
                     alert("Dynamic content load failed.");
-                }
+                },                
             });
-        });      
+        });
 
 
         $(".anchorSaidas").click(function () {
            // debugger;
+            $("#loadingDiv").show();
+
             var $buttonClicked = $(this);
             var id = $buttonClicked.attr('data-id');
             var options = { "backdrop": "static", keyboard: true };
@@ -201,16 +221,21 @@
                 datatype: "json",
                 success: function (data) {
                    // debugger;
+                    $("#loadingDiv").hide();
+
                     $('#myModalContent').html(data);
                     $('#myModal').modal(options);
                     $('#myModal').modal('show');
 
                 },
                 error: function () {
+
+                    $("#loadingDiv").hide();
+
                     alert("Dynamic content load failed.");
                 }
             });
-        }); 
+        });
 
         //$("#closbtn").click(function () {
         //    $('#myModal').modal('hide');

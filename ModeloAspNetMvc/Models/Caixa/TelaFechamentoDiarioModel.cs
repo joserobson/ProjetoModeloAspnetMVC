@@ -11,6 +11,12 @@ namespace ModeloAspNetMvc.Models.Caixa
 
         public IEnumerable<FechamentoDiarioModel> Fechamentos { get; set; }
 
+        public int PageSize { get; set; }
+
+        public int? PageNumber { get; set; }
+
+        public int TotalItemCount { get; set; }
+
         public TelaFechamentoDiarioModel()
         {
             this.Fechamentos = new List<FechamentoDiarioModel>();

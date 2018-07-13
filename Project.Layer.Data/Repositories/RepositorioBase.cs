@@ -12,7 +12,7 @@ using System.Text;
 namespace Project.Layer.Data.Repositories
 {
     public abstract class RepositorioBase<TEntity> : IDisposable,
-          IRepositorio<TEntity> where TEntity : BaseEntity
+          IRepository<TEntity> where TEntity : BaseEntity
     {
         protected ProjectContext ctx = new ProjectContext();
 

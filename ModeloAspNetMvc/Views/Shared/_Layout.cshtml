@@ -4,22 +4,30 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title> Modelo AspNet MVC - @ViewBag.Title </title>
-	@Styles.Render("~/Content/css")
-	@Scripts.Render("~/bundles/js")
+	@Styles.Render("~/Content/cssBundle")
+	@Scripts.Render("~/bundles/jsBundle")
 
 </head>
 <body class="with-side-menu control-panel control-panel-compact">
 	@Html.Partial("_Menu")
 
 	<div class="page-content">
-		<div class="container-fluid">
-			<div id="notificationError">
-				@Html.Partial("_Notifications")
-			</div>
+        <div class="container-fluid">
+            <div id="notificationError">
+                @Html.Partial("_Notifications")
+            </div>
+            
+            <div id="loadingDiv" style="display: none;" class="spinner">                
+                <div class="center-div">
+                    <div class="inner-div">
+                        <div class="loader"></div>
+                    </div>
+                </div>
+            </div>
 
-			@RenderBody()
-			<hr />
-		</div>
+            @RenderBody()
+            <hr />
+        </div>
 	</div>
 
 </body>

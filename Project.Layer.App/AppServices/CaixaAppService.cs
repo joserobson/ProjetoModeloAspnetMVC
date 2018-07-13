@@ -1,62 +1,160 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using System.Linq;
 using Project.Layer.App.AppModels.Caixa;
+using Project.Layer.Domain.Entities;
+using Project.Layer.Domain.Enums;
+using Project.Layer.Domain.Interfaces.Repositories;
 
 namespace Project.Layer.App.AppServices
 {
     public class CaixaAppService : ICaixaAppService
     {
+        private readonly ICaixaRepository _caixaRepository;
+
+
+        public CaixaAppService(ICaixaRepository caixaRepository)
+        {
+            this._caixaRepository = caixaRepository;
+        }
+
+        public IEnumerable<FechamentoDiarioAppModel> ObterFechamentosDoDia(string diaFechamento)
+        {
+            var fechamentos = this._caixaRepository.ObterFechamentosDoDia(diaFechamento);
+
+            if (!fechamentos.Any())
+            {
+                return new List<FechamentoDiarioAppModel>();
+            }
+
+            return fechamentos.Select(f => new FechamentoDiarioAppModel
+            {
+                Id = f.Id,
+                CaixaInicioDoDia = f.CaixaInicioDoDia,
+                DiaFechamento = f.DiaFechamento,
+                CaixaFinalDoDia = f.CaixaFinalDoDia,
+                Funcionario = f.Funcionario,
+                ValorDaRetirada = f.Retirada,
+                ValorDaSaida = f.ValorDeSaida,
+                ValorEntrada = f.ValorDeEntrada,
+                Saldo = f.Saldo,
+                Status = StatusCaixa(f.Saldo)
+            }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
+        }
+
+        public string StatusCaixa(string saldoParam)
+        {
+
+            var saldo = float.Parse(saldoParam.Replace("R$", ""));
+
+            if (saldo == 0)
+            {
+                return "Caixa Fechado";
+            }
+
+            return saldo > 0 ? "Caixa Passando" : "Caixa Faltando";
+        }
+
+
         public IEnumerable<FechamentoDiarioAppModel> ObterFechamentos()
         {
 
+            var fechamentos = this._caixaRepository.ObterFechamentos();
 
-            var fechamentos = new Collection<FechamentoDiarioAppModel>();
-
-            for (int i = 0; i < 10; i++)
+            if (!fechamentos.Any())
             {
-                var fechamento = new FechamentoDiarioAppModel
-                {
-                    CaixaInicioDoDia = "R$ 10,00",
-                    DiaFechamento = $"{i}/06/2018",
-                    DinheiroEmCaixa = "R$ 50,00",
-                    Funcionario = "Joao Victor",
-                    Saldo = "-10,00",
-                    Status = "Caixa Passando",
-                    ValorDaRetirada = "R$ 20,00",
-                    ValorDaSaida = "R$ 30,00",
-                    ValorEntrada = "R$ 00,00",
-                    Entradas = ObterEntradas(),
-                    Saidas = ObterSaidas()
-                };
-
-                fechamentos.Add(fechamento);
+                return new List<FechamentoDiarioAppModel>();
             }
 
-
-            return fechamentos;
-
+            return fechamentos.Select(f => new FechamentoDiarioAppModel
+            {
+                Id = f.Id,
+                CaixaInicioDoDia = f.CaixaInicioDoDia,
+                DiaFechamento = f.DiaFechamento,
+                CaixaFinalDoDia = f.CaixaFinalDoDia,
+                Funcionario = f.Funcionario,
+                ValorDaRetirada = f.Retirada,
+                ValorDaSaida = f.ValorDeSaida,
+                ValorEntrada = f.ValorDeEntrada,
+                Saldo = f.Saldo,
+                Status = StatusCaixa(f.Saldo)                             
+            }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
         }
 
-        private IEnumerable<MovimentoCaixaAppModel> ObterSaidas()
+
+        public IEnumerable<MovimentoCaixaAppModel> ObterEntradasDoCaixa(int id)
         {
-            var saidas = new List<MovimentoCaixaAppModel>();
+            var movimentos = this._caixaRepository.GetAll().Where(c => c.Id.Equals(id)).FirstOrDefault().MovimentosDoCaixa;
 
-            saidas.Add(new MovimentoCaixaAppModel { Descricao = "Café", Valor = "R$ 5,00" });
-            saidas.Add(new MovimentoCaixaAppModel { Descricao = "Almoço", Valor = "R$ 15,00" });
-
-            return saidas;
+            return movimentos.Where(m => m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Entrada).Select(m => new MovimentoCaixaAppModel
+            {
+                Descricao = m.Descricao,
+                Valor = m.Valor
+            });
         }
 
-        private IEnumerable<MovimentoCaixaAppModel> ObterEntradas()
+        public IEnumerable<MovimentoCaixaAppModel> ObterSaidasDoCaixa(int id)
         {
-            var entradas = new List<MovimentoCaixaAppModel>();
+            var movimentos = this._caixaRepository.GetAll().Where(c => c.Id.Equals(id)).FirstOrDefault().MovimentosDoCaixa;
 
-            entradas.Add(new MovimentoCaixaAppModel { Descricao = "PAg venda A Vista", Valor = "R$ 55,00" });
-            entradas.Add(new MovimentoCaixaAppModel { Descricao = "Pag PArcela", Valor = "R$ 35,00" });
-
-            return entradas;
+            return movimentos.Where(m => m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Saida).Select(m => new MovimentoCaixaAppModel
+            {
+                Descricao = m.Descricao,
+                Valor = m.Valor
+            });
         }
-    
+
+        public void CadastrarFechamentoDiario(FechamentoDiarioAppModel appServiceModel)
+        {
+            var caixa = new Caixa
+            {
+                CaixaInicioDoDia = appServiceModel.CaixaInicioDoDia,
+                DiaFechamento = appServiceModel.DiaFechamento,
+                Funcionario = appServiceModel.Funcionario,
+                Retirada = appServiceModel.ValorDaRetirada,
+                ValorDeEntrada = appServiceModel.ValorEntrada,
+                ValorDeSaida = appServiceModel.ValorDaSaida,
+                CaixaFinalDoDia = appServiceModel.CaixaInicioDoDia,
+                Saldo = appServiceModel.Saldo
+            };
+
+            caixa.MovimentosDoCaixa = GerarMovimentosDoCaixa(appServiceModel.Saidas, appServiceModel.Entradas, caixa);
+
+
+            this._caixaRepository.Adicionar(caixa);
+
+            this._caixaRepository.SalvarTodos();
+        }
+
+        private ICollection<MovimentoDoCaixa> GerarMovimentosDoCaixa(IEnumerable<MovimentoCaixaAppModel> saidas,
+            IEnumerable<MovimentoCaixaAppModel> entradas, Caixa caixa)
+        {
+            var movimentos = new List<MovimentoDoCaixa>();
+
+
+            foreach (var itemSaida in saidas)
+            {
+                movimentos.Add(new MovimentoDoCaixa
+                {
+                    Descricao = itemSaida.Descricao,
+                    Valor = itemSaida.Valor,
+                    Caixa = caixa,
+                    TipoMovimentoCaixa = (int)ETipoMovimentoCaixa.Saida
+                });
+            }
+
+            foreach (var itemEntrada in entradas)
+            {
+                movimentos.Add(new MovimentoDoCaixa
+                {
+                    Descricao = itemEntrada.Descricao,
+                    Valor = itemEntrada.Valor,
+                    Caixa = caixa,
+                    TipoMovimentoCaixa = (int)ETipoMovimentoCaixa.Entrada
+                });
+            }
+
+            return movimentos;
+        }
     }
 }

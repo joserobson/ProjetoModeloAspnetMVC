@@ -7,7 +7,7 @@ using System.Web.Http;
 
 namespace ModeloAspNetMvc.Controllers
 {
-    [RoutePrefix("api/caixaapi")]
+    [RoutePrefix("api/caixaApi")]
     public class CaixaApiController : ApiController
     {
 
@@ -20,10 +20,13 @@ namespace ModeloAspNetMvc.Controllers
         }
 
         [HttpPost]
+        [Route("CadastrarFechamentoDiario")]
         public IHttpActionResult CadastrarFechamentoDiario(FechamentoDiarioModel model)
         {
             var appServiceModel = Mapper.Map<FechamentoDiarioAppModel>(model);
             this._caixaAppService.CadastrarFechamentoDiario(appServiceModel);
+
+            //checar se existem mais de 100 registros e fazer o delete dos mais antigos
 
             return Ok();
         }

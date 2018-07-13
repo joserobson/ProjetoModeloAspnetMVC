@@ -4,6 +4,7 @@ namespace Project.Layer.App.AppModels.Caixa
 {
     public class FechamentoDiarioAppModel
     {
+        public int Id { get; set; }
         public string DiaFechamento { get; set; }
         public string CaixaInicioDoDia { get; set; }
         public string ValorEntrada { get; set; }
@@ -11,7 +12,7 @@ namespace Project.Layer.App.AppModels.Caixa
         public string ValorDaRetirada { get; set; }
         public string Status { get; set; }
         public string Funcionario { get; set; }
-        public string DinheiroEmCaixa { get; set; }
+        public string CaixaFinalDoDia { get; set; }
 
         public string Saldo { get; set; }
 
