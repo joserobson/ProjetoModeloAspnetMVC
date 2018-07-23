@@ -45,7 +45,10 @@ namespace Project.Layer.App.AppServices
         public string StatusCaixa(string saldoParam)
         {
 
-            var saldo = float.Parse(saldoParam.Replace("R$", ""));
+            var saldoRemoverCifrao = saldoParam.Replace("R$", "").Trim();
+            var saldoRemoverEspacos = saldoRemoverCifrao.Replace(" ", string.Empty).Trim();
+
+            var saldo = float.Parse(saldoRemoverEspacos);
 
             if (saldo == 0)
             {
@@ -114,7 +117,7 @@ namespace Project.Layer.App.AppServices
                 Retirada = appServiceModel.ValorDaRetirada,
                 ValorDeEntrada = appServiceModel.ValorEntrada,
                 ValorDeSaida = appServiceModel.ValorDaSaida,
-                CaixaFinalDoDia = appServiceModel.CaixaInicioDoDia,
+                CaixaFinalDoDia = appServiceModel.CaixaFinalDoDia,
                 Saldo = appServiceModel.Saldo
             };
 
