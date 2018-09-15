@@ -31,8 +31,7 @@ namespace Project.Layer.Data.Contexto
 
 
             modelBuilder.Entity<MovimentoDoCaixa>().ToTable("tb_movimento_caixa");
-            modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.Id).HasColumnName("id");
-            //modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.Id).HasDatabaseGeneratedOption(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.Id).HasColumnName("id");            
             modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.Descricao).HasColumnName("descricao_movimento");
             modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.Valor).HasColumnName("valor_movimento");
             modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.TipoMovimentoCaixa).HasColumnName("tipo_movimento_caixa");
@@ -42,6 +41,24 @@ namespace Project.Layer.Data.Contexto
                 .HasRequired<Caixa>(s => s.Caixa)
                 .WithMany(g => g.MovimentosDoCaixa)
                 .HasForeignKey<int>(s => s.IdDoCaixa);
+
+
+            modelBuilder.Entity<ResumoFinanceiroMensal>().ToTable("tb_resumo_financeiro");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.Id).HasColumnName("Id");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorDasPrestacoesRecebidasNoCartao).HasColumnName("valor_prestacoes_cartao");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorDasPrestacoesRecebidasNoCheque).HasColumnName("valor_prestacoes_cheque");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorDasPrestacoesRecebidasNoDinheiro).HasColumnName("valor_prestacoes_dinheiro");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorDasVendasAPrazo).HasColumnName("valor_vendas_prazo");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorDasVendasAVista).HasColumnName("valor_vendas_vista");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorDosPagsRecebidosAVistaNoCartao).HasColumnName("valor_pags_vista_cartao");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorDosPagsRecebidosAVistaNoCheque).HasColumnName("valor_pags_vista_cheque");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorDosPagsRecebidosAVistaNoDinheiro).HasColumnName("valor_pags_vista_dinheiro");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorTotalDosPagsRecebidosAVista).HasColumnName("valor_total_pags_vista");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorTotalEmPrestacoesRecebidas).HasColumnName("valor_total_prestacoes");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorTotalEmPagamentosRecebidos).HasColumnName("valor_total_pags_recebidos");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorTotalEmVendas).HasColumnName("valor_total_vendas");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.MesAno).HasColumnName("mes_ano");
+
 
             base.OnModelCreating(modelBuilder);
         }

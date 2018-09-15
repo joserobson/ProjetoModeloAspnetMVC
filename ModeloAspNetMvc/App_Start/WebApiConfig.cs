@@ -1,5 +1,4 @@
-﻿using ModeloAspNetMvc.App_Start;
-using Project.CrossCutting.Ioc;
+﻿using Project.CrossCutting.Ioc;
 using SimpleInjector.Integration.WebApi;
 using System.Web.Http;
 

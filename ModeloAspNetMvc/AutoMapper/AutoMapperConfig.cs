@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Project.Layer.App.AutoMapper;
 
 namespace ModeloAspNetMvc.AutoMapper
 {
@@ -9,6 +10,7 @@ namespace ModeloAspNetMvc.AutoMapper
             Mapper.Initialize(x =>
             {
                 x.AddProfile<WebMappingProfile>();
+                x.AddProfile<AppMappingProfile>();
             });
         }
     }

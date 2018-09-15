@@ -60,6 +60,7 @@
     <Compile Include="Repositories\CaixaRepository.cs" />
     <Compile Include="Repositories\ClienteRepository.cs" />
     <Compile Include="Repositories\RepositorioBase.cs" />
+    <Compile Include="Repositories\ResumoFinanceiroMensalRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

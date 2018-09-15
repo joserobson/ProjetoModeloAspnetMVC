@@ -1,10 +1,9 @@
 ﻿using ConsoleAppTeste.Model;
+using Project.Layer.App.AppModels.Venda;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ConsoleAppTeste
@@ -21,63 +20,19 @@ namespace ConsoleAppTeste
         static async Task RunAsync()
         {
             // Update port # in the following line.
-            client.BaseAddress = new Uri("http://comfacilweb.gearhostpreview.com/");
+            //client.BaseAddress = new Uri("http://comfacilweb.gearhostpreview.com/");
+
+            client.BaseAddress = new Uri("http://localhost/ModeloAspNetMvc/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
             try
             {
-                for (int i = 1; i <= 10; i++)
-                {
 
-                    var fechamento = new FechamentoDiarioModel
-                    {
+                //TestFechamentoDiarioResp();
 
-                        ValorEntrada = "298,13",
-                        ValorDaSaida = "50,00",
-                        Saldo = "0,97",
-                        Status = "",
-                        DiaFechamento = "15/11/2018",
-                        CaixaFinalDoDia = "3.332,10",
-                        CaixaInicioDoDia = "403,00",
-                        ValorDaRetirada = "3.060,00",
-                        Funcionario = "João pppp",
-                        Entradas = ObterEntradas(),
-                        Saidas = ObterSaidas()
-                    };
-
-                    await SalvarFechamentoDiario(fechamento);
-                }
-
-                //GetFechamentosDiarioAsync("api/caixaapi");
-
-                // Create a new product
-                //Product product = new Product
-                //{
-                //    Name = "Gizmo",
-                //    Price = 100,
-                //    Category = "Widgets"
-                //};
-
-                //var url = await CreateProductAsync(product);
-                //Console.WriteLine($"Created at {url}");
-
-                //// Get the product
-                //product = await GetProductAsync(url.PathAndQuery);
-                //ShowProduct(product);
-
-                //// Update the product
-                //Console.WriteLine("Updating price...");
-                //product.Price = 80;
-                //await UpdateProductAsync(product);
-
-                //// Get the updated product
-                //product = await GetProductAsync(url.PathAndQuery);
-                //ShowProduct(product);
-
-                //// Delete the product
-                //var statusCode = await DeleteProductAsync(product.Id);
-                //Console.WriteLine($"Deleted (HTTP Status = {(int)statusCode})");
+                TestResumoFinanceiroRest();
+                
 
             }
             catch (Exception e)
@@ -86,6 +41,48 @@ namespace ConsoleAppTeste
             }
 
             Console.ReadLine();
+        }
+
+        private async static void TestResumoFinanceiroRest()
+        {
+
+
+            var resumo = new ResumoFinanceiroMensalAppModel
+            {
+                MesAno = "10/2015"
+            };
+
+            var resumos = new List<ResumoFinanceiroMensalAppModel>() { resumo };
+
+
+            await SalvarResumosFinanceiros(resumos);
+
+
+        }
+
+        private async static void TestFechamentoDiarioResp()
+        {
+            for (int i = 1; i <= 10; i++)
+            {
+
+                var fechamento = new FechamentoDiarioModel
+                {
+
+                    ValorEntrada = "298,13",
+                    ValorDaSaida = "50,00",
+                    Saldo = "0,97",
+                    Status = "",
+                    DiaFechamento = "15/11/2018",
+                    CaixaFinalDoDia = "3.332,10",
+                    CaixaInicioDoDia = "403,00",
+                    ValorDaRetirada = "3.060,00",
+                    Funcionario = "João pppp",
+                    Entradas = ObterEntradas(),
+                    Saidas = ObterSaidas()
+                };
+
+                await SalvarFechamentoDiario(fechamento);
+            }
         }
 
         static async Task<IEnumerable<FechamentoDiarioModel>> GetFechamentosDiarioAsync(string path)
@@ -137,6 +134,16 @@ namespace ConsoleAppTeste
             saidas.Add(movimentoCaixa);
 
             return saidas;
+        }
+
+        static async Task<HttpResponseMessage> SalvarResumosFinanceiros(IEnumerable<ResumoFinanceiroMensalAppModel> resumos)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                "api/vendaApi/CadastrarResumosFinanceiros", resumos);
+            response.EnsureSuccessStatusCode();
+
+            // return URI of the created resource.
+            return response;
         }
     }
 }

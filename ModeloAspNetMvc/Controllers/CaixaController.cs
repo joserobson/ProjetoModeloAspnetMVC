@@ -3,7 +3,6 @@ using log4net;
 using ModeloAspNetMvc.Models.Caixa;
 using PagedList;
 using Project.Layer.App.AppServices;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Web.Mvc;

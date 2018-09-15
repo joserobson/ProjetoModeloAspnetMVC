@@ -16,7 +16,10 @@ namespace Project.CrossCutting.Ioc
 
             containerToInject.Register<IClienteAppService, ClienteAppService>();
             containerToInject.Register<ICaixaAppService, CaixaAppService>();
+            containerToInject.Register<IVendaAppService, VendaAppService>();
 
+
+            containerToInject.Register<IResumoFinanceiroMensalRepository, ResumoFinanceiroMensalRepository>(Lifestyle.Scoped);
             containerToInject.Register<ICaixaRepository, CaixaRepository>(Lifestyle.Scoped);
         }
     }

@@ -1,0 +1,89 @@
+﻿@model ModeloAspNetMvc.Models.Venda.ResumoFinanceiroMensalModel
+
+@{
+    ViewBag.Title = "Balanço Mensal";
+}
+
+<header class="section-header">
+    <div class="tbl">
+        <div class="tbl-row">
+            <div class="tbl-cell">
+                <h3>Caixa</h3>
+                <ol class="breadcrumb breadcrumb-simple">
+                    <li><a href="#">ComFacil</a></li>
+                    <li><a href="#">Vendas</a></li>
+                    <li class="active">Balanço Mensal</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<section class="card box-block">
+    <div class="card-block">
+        @using (Html.BeginForm("BalancoMensal", "Venda", FormMethod.Get, new { @id = "formPesquisaBalancoMensal" }))
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FiltroMesAno)
+                        @Html.TextBox("FiltroMesAno", Model.FiltroMesAno, new { @class = "form-control", @id = "FiltroMesAno" })
+                    </div>
+                </div>
+
+                <div class="col-md-9 text-right">
+                    <div class="form-group">
+                        <input type="submit" value="Consultar" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="card-block">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr class="table-info">
+                    <th class="text-center">
+                        <strong style="font-size: 25px;">Vendas: @Html.ValueFor(Model=> Model.ValorTotalEmVendas)</strong>                        
+                    </th>
+                    <th class="text-center"><strong style="font-size: 25px;">Capital: @Html.ValueFor(Model => Model.ValorTotalEmPagamentosRecebidos)</strong></th>
+                </tr>
+                <tr>
+                    <td rowspan="4"><strong style="font-size: 20px;">À Vista:</strong> @Html.ValueFor(Model => Model.ValorDasVendasAVista)</td>
+                    <td><strong style="font-size: 20px;">À Vista:</strong> @Html.ValueFor(Model => Model.ValorTotalDosPagsRecebidosAVista)</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center"><strong style="font-size: 18px;">Cartão:</strong>@Html.ValueFor(Model => Model.ValorDosPagsRecebidosAVistaNoCartao)</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center"><strong style="font-size: 18px;">Dinheiro:</strong>@Html.ValueFor(Model => Model.ValorDosPagsRecebidosAVistaNoCheque)</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center"><strong style="font-size: 18px;">Cheque:</strong>@Html.ValueFor(Model => Model.ValorDosPagsRecebidosAVistaNoDinheiro)</td>
+                </tr>
+
+                <tr>
+                    <td rowspan="4"><strong style="font-size: 20px;">À Prazo:</strong> @Html.ValueFor(Model => Model.ValorDasVendasAPrazo)</td>
+                    <td><strong style="font-size: 20px;">Em Prestações:</strong> @Html.ValueFor(Model => Model.ValorTotalEmPrestacoesRecebidas)</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center"><strong style="font-size: 18px;">Cartão:</strong>@Html.ValueFor(Model => Model.ValorDasPrestacoesRecebidasNoCartao)</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center"><strong style="font-size: 18px;">Dinheiro:</strong>@Html.ValueFor(Model => Model.ValorDasPrestacoesRecebidasNoDinheiro)</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center"><strong style="font-size: 18px;">Cheque:</strong>@Html.ValueFor(Model => Model.ValorDasPrestacoesRecebidasNoCheque)</td>
+                </tr>
+            </table>
+        </div>        
+    </div>    
+</section>

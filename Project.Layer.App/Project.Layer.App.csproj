@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="ComFacil.FrenteCaixa.Common.HelperHttpService">
       <HintPath>..\..\..\..\Source\Repos\ComFacil.FrenteCaixa\ComFacil.FrenteCaixa.Common.HelperHttpService\bin\Debug\ComFacil.FrenteCaixa.Common.HelperHttpService.dll</HintPath>
     </Reference>
@@ -39,6 +42,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -52,16 +56,21 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppModels\Caixa\FechamentoDiarioAppModel.cs" />
     <Compile Include="AppModels\Caixa\MovimentoCaixaAppModel.cs" />
     <Compile Include="AppModels\RespostaAppViewModel.cs" />
+    <Compile Include="AppModels\Venda\ResumoFinanceiroMensalAppModel.cs" />
     <Compile Include="AppServices\CaixaAppService.cs" />
     <Compile Include="AppServices\ClienteAppService.cs" />
     <Compile Include="AppServices\ICaixaAppService.cs" />
     <Compile Include="AppServices\IClienteAppService.cs" />
+    <Compile Include="AppServices\IVendaAppService.cs" />
+    <Compile Include="AppServices\VendaAppService.cs" />
+    <Compile Include="AutoMapper\AppMappingProfile.cs" />
     <Compile Include="Helper\HttpServiceHelper.cs" />
     <Compile Include="HttpServices\HttpServiceGlobal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
