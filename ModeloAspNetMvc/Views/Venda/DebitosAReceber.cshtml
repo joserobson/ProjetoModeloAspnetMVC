@@ -1,0 +1,105 @@
+﻿@model ModeloAspNetMvc.Models.Venda.ResumoDebitosAReceberModel
+
+@{
+    ViewBag.Title = "Débitos A Receber";
+}
+
+<header class="section-header">
+    <div class="tbl">
+        <div class="tbl-row">
+            <div class="tbl-cell">
+                <h3>Vendas</h3>
+                <ol class="breadcrumb breadcrumb-simple">
+                    <li><a href="#">ComFacil</a></li>
+                    <li><a href="#">Vendas</a></li>
+                    <li class="active">Débitos a Receber</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<section class="card box-block">
+    <div class="card-block">        
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FiltroDataReferencia)
+                        @Html.TextBox("FiltroDataReferencia", Model.FiltroDataReferencia, new { @class = "form-control", @id = "filtroDataReferencia" })
+                    </div>
+                </div>
+
+                <div class="col-md-9 text-right">
+                    <div class="form-group">
+                        <input type="button" value="Consultar" class="btn btn-primary" onclick="buscarDebitos()" />
+                    </div>
+                </div>
+            </div>        
+    </div>
+
+    <div class="card-block">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <tr class="table-info">
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalEmDebitosRetroativos)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalEmDebitosAReceber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ValorTotal)
+                    </th>
+                </tr>
+
+                <tr>
+                    <td>
+                        @Html.TextBoxFor(model=>model.TotalEmDebitosRetroativos, new { @readonly = "readonly"})
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.TotalEmDebitosAReceber, new { @readonly = "readonly" })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.ValorTotal, new { @readonly = "readonly" })
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+
+    function buscarDebitos() {
+
+        abrirLoading();
+
+        var parametro = {
+            dataReferencia: $('#filtroDataReferencia').val()
+        };
+        $.ajax(
+        {
+            type: 'POST',
+            url: "@Url.Action("BuscarDebitosAReceber", "Venda")",            
+            data: parametro,                        
+            success: function (data) {
+
+                $("#TotalEmDebitosRetroativos").val(data.TotalEmDebitosRetroativos);
+                $("#TotalEmDebitosAReceber").val(data.TotalEmDebitosAReceber);
+                $("#ValorTotal").val(data.ValorTotal);
+
+                fecharLoading();
+            },
+            error: function (error) {
+
+                fecharLoading();
+
+                alert(error);
+            }
+        });
+
+    }
+
+</script>

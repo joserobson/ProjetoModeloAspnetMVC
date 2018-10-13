@@ -12,6 +12,16 @@
 	@Html.Partial("_Menu")
 
 	<div class="page-content">
+
+        <div id="divLoading" style="display: none" class="spinner">
+            <div class="center-div">
+                <div class="inner-div">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="container-fluid">
             <div id="notificationError">
                 @Html.Partial("_Notifications")

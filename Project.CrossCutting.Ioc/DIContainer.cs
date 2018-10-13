@@ -12,15 +12,15 @@ namespace Project.CrossCutting.Ioc
 
         public static void RegisterDependencies(Container containerToInject)
         {
-            containerToInject.Register<ProjectContext>(Lifestyle.Scoped);
+            //containerToInject.Register<ProjectContext>(Lifestyle.Scoped);
 
-            containerToInject.Register<IClienteAppService, ClienteAppService>();
-            containerToInject.Register<ICaixaAppService, CaixaAppService>();
+            //containerToInject.Register<IClienteAppService, ClienteAppService>();
+            //containerToInject.Register<ICaixaAppService, CaixaAppService>();
             containerToInject.Register<IVendaAppService, VendaAppService>();
 
 
-            containerToInject.Register<IResumoFinanceiroMensalRepository, ResumoFinanceiroMensalRepository>(Lifestyle.Scoped);
-            containerToInject.Register<ICaixaRepository, CaixaRepository>(Lifestyle.Scoped);
+            //containerToInject.Register<IResumoFinanceiroMensalRepository, ResumoFinanceiroMensalRepository>(Lifestyle.Scoped);
+            //containerToInject.Register<ICaixaRepository, CaixaRepository>(Lifestyle.Scoped);
         }
     }
 }

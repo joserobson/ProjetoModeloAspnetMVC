@@ -7,7 +7,6 @@ namespace ModeloAspNetMvc.Models.Venda
         [Display(Name = "Mês/Ano")]
         public string FiltroMesAno { get; set; }
 
-
         public string ValorTotalEmVendas { get; set; }
         public string ValorDasVendasAVista { get; set; }
         public string ValorDasVendasAPrazo { get; set; }

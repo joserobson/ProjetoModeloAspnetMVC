@@ -32,7 +32,8 @@ namespace ModeloAspNetMvc
                         "~/Scripts/lib/app.js",                        
                         "~/Scripts/moment.min.js",
                         "~/Scripts/bootstrap-datepicker.min.js",
-                        "~/Scripts/locales/bootstrap-datepicker.pt-BR.min.js"));
+                        "~/Scripts/locales/bootstrap-datepicker.pt-BR.min.js",
+                        "~/Scripts/lib/blockUI/jquery.blockUI.js"));
         }
     }
 }

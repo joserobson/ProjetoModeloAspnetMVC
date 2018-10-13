@@ -14,9 +14,14 @@ namespace ModeloAspNetMvc.Controllers
         private ICaixaAppService _caixaAppService;
         private static  readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        public CaixaController(ICaixaAppService caixaAppService)
+        //public CaixaController(ICaixaAppService caixaAppService)
+        //{
+        //    this._caixaAppService = caixaAppService;
+        //}
+
+        public CaixaController()
         {
-            this._caixaAppService = caixaAppService;
+
         }
 
         // GET: Caixa

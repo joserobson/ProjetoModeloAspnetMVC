@@ -6,7 +6,7 @@ using Project.Layer.App.AppModels.Venda;
 
 namespace ModeloAspNetMvc.AutoMapper
 {
-    public class WebMappingProfile: Profile
+    public class WebMappingProfile : Profile
     {
         public WebMappingProfile()
         {
@@ -28,10 +28,13 @@ namespace ModeloAspNetMvc.AutoMapper
                 .ForMember(model => model.ValorTotalDosPagsRecebidosAVista, appModel => appModel.MapFrom(o => o.ValorTotalDosPagsRecebidosAVista.ToString("C2")))
                 .ForMember(model => model.ValorTotalEmPagamentosRecebidos, appModel => appModel.MapFrom(o => o.ValorTotalEmPagamentosRecebidos.ToString("C2")))
                 .ForMember(model => model.ValorTotalEmPrestacoesRecebidas, appModel => appModel.MapFrom(o => o.ValorTotalEmPrestacoesRecebidas.ToString("C2")))
-                .ForMember(model => model.ValorTotalEmVendas, appModel => appModel.MapFrom(o => o.ValorTotalEmVendas.ToString("C2")))                
-                ;
+                .ForMember(model => model.ValorTotalEmVendas, appModel => appModel.MapFrom(o => o.ValorTotalEmVendas.ToString("C2")));
 
-            
+
+            CreateMap<ResumoDebitosAReceberAppModel, ResumoDebitosAReceberModel>()
+                .ForMember(model => model.TotalEmDebitosAReceber, appModel => appModel.MapFrom(o => o.ValorAReceber.ToString("C2")))
+                .ForMember(model => model.TotalEmDebitosRetroativos, appModel => appModel.MapFrom(o => o.ValorRetroativo.ToString("C2")))
+                .ForMember(model => model.ValorTotal, appModel => appModel.MapFrom(o => (o.ValorAReceber + o.ValorRetroativo).ToString("C2")));
         }
     }
 }

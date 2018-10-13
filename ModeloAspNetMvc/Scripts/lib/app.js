@@ -602,3 +602,27 @@ $(document).ready(function(){
 
     //$('body').addClass('sidebar-hidden');
 });
+
+function abrirLoading() {
+    //$body = $("body");
+    //$body.block({
+    //    message: '<div class="blockui-default-message"><i class="fa fa-circle-o-notch fa-spin"></i><h6>Aguarde</h6></div>',
+    //    overlayCSS: {
+    //        background: 'rgba(24, 44, 68, 0.8)',
+    //        opacity: 1,
+    //        cursor: 'wait'
+    //    },
+    //    css: {
+    //        width: '50%'
+    //    },
+    //    blockMsgClass: 'block-msg-default'
+    //});
+
+    $("#divLoading").show();
+}
+
+function fecharLoading() {
+    //$body.unblock();
+
+    $("#divLoading").hide();
+}
