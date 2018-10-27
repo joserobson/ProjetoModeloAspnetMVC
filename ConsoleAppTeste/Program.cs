@@ -154,7 +154,7 @@ namespace ConsoleAppTeste
         {
             HttpClient client = new HttpClient();
 
-            client.BaseAddress = new Uri("http://comfacilweb.gearhostpreview.com/");
+            client.BaseAddress = new Uri("https://painelcomfacil.azurewebsites.net/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = await client.GetAsync("api/caixaapi/ObterFechamentos");
@@ -163,11 +163,14 @@ namespace ConsoleAppTeste
             {
                 var fechamentos = await response.Content.ReadAsAsync<IEnumerable<FechamentoDiarioModel>>();
 
-                var resposta = await SalvarFechamentoDiario(fechamentos.FirstOrDefault());
-
-                if (resposta.IsSuccessStatusCode)
+                foreach (var item in fechamentos)
                 {
+                    var resposta = await SalvarFechamentoDiario(item);
 
+                    if (!resposta.IsSuccessStatusCode)
+                    {
+                        break;
+                    }
                 }
             }
 
