@@ -2,6 +2,7 @@
 using Project.Layer.App.AppModels.Venda;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -31,8 +32,11 @@ namespace ConsoleAppTeste
 
                 //TestFechamentoDiarioResp();
 
-                TestResumoFinanceiroRest();
-                
+                //TestResumoFinanceiroRest();
+
+                ObterFechamentosSqlServer();
+
+
 
             }
             catch (Exception e)
@@ -145,6 +149,30 @@ namespace ConsoleAppTeste
             // return URI of the created resource.
             return response;
         }
+
+        private async static void ObterFechamentosSqlServer()
+        {
+            HttpClient client = new HttpClient();
+
+            client.BaseAddress = new Uri("http://comfacilweb.gearhostpreview.com/");
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = await client.GetAsync("api/caixaapi/ObterFechamentos");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var fechamentos = await response.Content.ReadAsAsync<IEnumerable<FechamentoDiarioModel>>();
+
+                var resposta = await SalvarFechamentoDiario(fechamentos.FirstOrDefault());
+
+                if (resposta.IsSuccessStatusCode)
+                {
+
+                }
+            }
+
+        }
+
     }
 }
 

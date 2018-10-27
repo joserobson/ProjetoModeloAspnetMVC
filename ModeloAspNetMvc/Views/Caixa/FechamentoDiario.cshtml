@@ -68,85 +68,89 @@
     </div>
 
     @*<section class="card">*@
-    <div class="card-block">
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <tr class="table-info">
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DiaFechamento)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaInicioDoDia)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaFinalDoDia)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorEntrada)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaSaida)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Saldo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Status)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaRetirada)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Funcionario)
-                    </th>
-                    <th></th>
-                    <th></th>
-                </tr>
 
-                @foreach (var item in Model.Fechamentos)
-                {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DiaFechamento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CaixaInicioDoDia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CaixaFinalDoDia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ValorEntrada)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ValorDaSaida)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Saldo)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ValorDaRetirada)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Funcionario)
-                    </td>
-                    <td>
-                        <a href="javascript:void(0);" class="anchorEntradas" data-id="@item.Id">Entradas</a>
-                    </td>
-                    <td>
-                        <a href="javascript:void(0);" class="anchorSaidas" data-id="@item.Id">Saídas</a>
-                    </td>
-                </tr>
-                }
-            </table>
+    @if (Model.Fechamentos.Any())
+    {
+        <div class="card-block">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr class="table-info">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DiaFechamento)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaInicioDoDia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaFinalDoDia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorEntrada)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaSaida)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Saldo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaRetirada)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Funcionario)
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.Fechamentos)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DiaFechamento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CaixaInicioDoDia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CaixaFinalDoDia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValorEntrada)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValorDaSaida)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Saldo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValorDaRetirada)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Funcionario)
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" class="anchorEntradas" data-id="@item.Id">Entradas</a>
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" class="anchorSaidas" data-id="@item.Id">Saídas</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="pager">
+                @Html.PagedListPager((IPagedList)Model.Fechamentos, page => Url.Action("FechamentoDiario", new { page }))
+            </div>
         </div>
-        <div class="pager">
-            @Html.PagedListPager((IPagedList)Model.Fechamentos, page => Url.Action("FechamentoDiario", new { page }))
-        </div>
-    </div>
+    }
 </section>
 
 
@@ -201,7 +205,7 @@
                     $("#loadingDiv").hide();
 
                     alert("Dynamic content load failed.");
-                },                
+                },
             });
         });
 

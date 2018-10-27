@@ -34,7 +34,7 @@ namespace Project.Layer.Data.Contexto
             modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.Id).HasColumnName("id");            
             modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.Descricao).HasColumnName("descricao_movimento");
             modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.Valor).HasColumnName("valor_movimento");
-            modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.TipoMovimentoCaixa).HasColumnName("tipo_movimento_caixa");
+            modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.TipoMovimentoCaixa).HasColumnName("tipo_movimento");
             modelBuilder.Entity<MovimentoDoCaixa>().Property(x => x.IdDoCaixa).HasColumnName("id_caixa");
 
             modelBuilder.Entity<MovimentoDoCaixa>()

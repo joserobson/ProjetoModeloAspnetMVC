@@ -9,6 +9,7 @@ namespace Project.Layer.Data.Repositories
     {
         public IEnumerable<Caixa> ObterFechamentos()
         {
+            
             return this.GetAll().ToList().Select(c => new Caixa
             {
                 CaixaInicioDoDia = c.CaixaInicioDoDia,
