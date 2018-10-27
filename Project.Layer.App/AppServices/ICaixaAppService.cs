@@ -12,5 +12,6 @@ namespace Project.Layer.App.AppServices
         IEnumerable<FechamentoDiarioAppModel> ObterFechamentosDoDia(string diaFechamento, int currentPage, int maxRows);
         int CountObterFechamentos();
         int CountObterFechamentosDoDia(string filtroDia);
+        IEnumerable<FechamentoDiarioAppModel> ObterFechamentosComDetalhes();
     }
 }

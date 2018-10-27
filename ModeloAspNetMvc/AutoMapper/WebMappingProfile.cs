@@ -13,6 +13,7 @@ namespace ModeloAspNetMvc.AutoMapper
             //CreateMap<Filial, FilialView>().ReverseMap();
 
             CreateMap<FechamentoDiarioAppModel, FechamentoDiarioModel>().ReverseMap();
+
             CreateMap<MovimentoCaixaAppModel, MovimentoCaixaModel>().ReverseMap();
 
 

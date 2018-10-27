@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Project.Layer.App.AppModels.Caixa;
 using Project.Layer.Domain.Entities;
 using Project.Layer.Domain.Enums;
@@ -58,6 +59,35 @@ namespace Project.Layer.App.AppServices
             return saldo > 0 ? "Caixa Passando" : "Caixa Faltando";
         }
 
+        public IEnumerable<FechamentoDiarioAppModel> ObterFechamentosComDetalhes()
+        {
+
+            var fechamentos = this._caixaRepository.ObterFechamentos(1, 2000);
+
+            if (!fechamentos.Any())
+            {
+                return new List<FechamentoDiarioAppModel>();
+            }
+
+            return fechamentos.Select(f => new FechamentoDiarioAppModel
+            {
+                Id = f.Id,
+                CaixaInicioDoDia = f.CaixaInicioDoDia,
+                DiaFechamento = f.DiaFechamento,
+                CaixaFinalDoDia = f.CaixaFinalDoDia,
+                Funcionario = f.Funcionario,
+                ValorDaRetirada = f.Retirada,
+                ValorDaSaida = f.ValorDeSaida,
+                ValorEntrada = f.ValorDeEntrada,
+                Saldo = f.Saldo,
+                Status = StatusCaixa(f.Saldo),
+                Entradas = Mapper.Map<IEnumerable<MovimentoCaixaAppModel>>(f.MovimentosDoCaixa.Where(m=>m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Entrada)),
+                Saidas = Mapper.Map<IEnumerable<MovimentoCaixaAppModel>>(f.MovimentosDoCaixa.Where(m => m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Saida))
+
+            }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
+        }
+
+
 
         public IEnumerable<FechamentoDiarioAppModel> ObterFechamentos(int currentPage, int maxRows)
         {
@@ -80,7 +110,7 @@ namespace Project.Layer.App.AppServices
                 ValorDaSaida = f.ValorDeSaida,
                 ValorEntrada = f.ValorDeEntrada,
                 Saldo = f.Saldo,
-                Status = StatusCaixa(f.Saldo)
+                Status = StatusCaixa(f.Saldo),
             }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
         }
 
