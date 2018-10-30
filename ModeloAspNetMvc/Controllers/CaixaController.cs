@@ -30,7 +30,18 @@ namespace ModeloAspNetMvc.Controllers
         {
             log.Info("Index");
 
-            return View("FechamentoDiario", new TelaFechamentoDiarioModel());
+            IEnumerable<FechamentoDiarioModel> dados = new List<FechamentoDiarioModel>();
+            dados = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentos());
+
+
+            var pageNumber = 1;
+            int paginaTamanho = 15;
+
+            return View("FechamentoDiario",new TelaFechamentoDiarioModel
+            {
+                Fechamentos = dados.ToPagedList(pageNumber, paginaTamanho),
+                FiltroDia = ""
+            });
         }
 
         public ActionResult FechamentoDiario(TelaFechamentoDiarioModel model, int? page)

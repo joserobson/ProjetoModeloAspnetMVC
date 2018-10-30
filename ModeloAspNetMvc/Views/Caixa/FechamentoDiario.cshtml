@@ -68,40 +68,43 @@
     </div>
 
     @*<section class="card">*@
-    <div class="card-block">
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <tr class="table-info">
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DiaFechamento)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaInicioDoDia)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaFinalDoDia)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorEntrada)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaSaida)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Saldo)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Status)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaRetirada)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Funcionario)
-                    </th>
-                    <th></th>
-                    <th></th>
-                </tr>
+
+    @if (Model.Fechamentos.Any())
+    {
+        <div class="card-block">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr class="table-info">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DiaFechamento)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaInicioDoDia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaFinalDoDia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorEntrada)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaSaida)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Saldo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaRetirada)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Funcionario)
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
 
                 @foreach (var item in Model.Fechamentos)
                 {
@@ -201,7 +204,7 @@
                     $("#loadingDiv").hide();
 
                     alert("Dynamic content load failed.");
-                },                
+                },
             });
         });
 
