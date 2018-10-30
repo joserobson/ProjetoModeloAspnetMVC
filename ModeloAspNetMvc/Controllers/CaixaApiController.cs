@@ -14,10 +14,10 @@ namespace ModeloAspNetMvc.Controllers
         private ICaixaAppService _caixaAppService;
        
 
-        //public CaixaApiController(ICaixaAppService caixaAppService)
-        //{
-        //    this._caixaAppService = caixaAppService;
-        //}
+        public CaixaApiController(ICaixaAppService caixaAppService)
+        {
+            this._caixaAppService = caixaAppService;
+        }
 
         [HttpPost]
         [Route("CadastrarFechamentoDiario")]

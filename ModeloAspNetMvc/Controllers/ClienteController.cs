@@ -9,10 +9,10 @@ namespace ModeloAspNetMvc.Controllers
     {
         private IClienteAppService _clienteAppService;
 
-        //public ClienteController(IClienteAppService clienteAppService)
-        //{
-        //    this._clienteAppService = clienteAppService;
-        //}
+        public ClienteController(IClienteAppService clienteAppService)
+        {
+            this._clienteAppService = clienteAppService;
+        }
 
         public ClienteController()
         {

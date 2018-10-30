@@ -22,7 +22,7 @@ namespace ModeloAspNetMvc.Controllers
         [Route("CadastrarResumosFinanceiros")]
         public IHttpActionResult CadastrarResumosFinanceiros(IEnumerable<ResumoFinanceiroMensalAppModel> resumos)
         {            
-            //_vendaAppService.CadastrarResumosFinanceiros(resumos);
+            _vendaAppService.CadastrarResumosFinanceiros(resumos);
 
             return Ok();
         }

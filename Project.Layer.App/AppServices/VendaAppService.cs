@@ -16,10 +16,10 @@ namespace Project.Layer.App.AppServices
 
         private readonly IResumoFinanceiroMensalRepository _resumoFinanceiroMensalRepository;
 
-        //public VendaAppService(IResumoFinanceiroMensalRepository resumoFinanceiroMensalRepository)
-        //{
-        //    _resumoFinanceiroMensalRepository = resumoFinanceiroMensalRepository;
-        //}       
+        public VendaAppService(IResumoFinanceiroMensalRepository resumoFinanceiroMensalRepository)
+        {
+            _resumoFinanceiroMensalRepository = resumoFinanceiroMensalRepository;
+        }       
 
         public VendaAppService()
         {
