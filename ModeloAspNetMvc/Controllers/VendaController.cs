@@ -59,5 +59,19 @@ namespace ModeloAspNetMvc.Controllers
             return Json(viewModel);
 
         }
+
+        public ActionResult Index()
+        {
+            var balancoAppModel = _vendaAppService.ObterResumoFinanceiroMensal("");
+
+            var balancoModel = Mapper.Map<ResumoFinanceiroMensalModel>(balancoAppModel);
+
+            if (balancoModel == null)
+            {
+                balancoModel = new ResumoFinanceiroMensalModel();
+            }
+
+            return View("BalancoMensal", balancoModel);
+        }
     }
 }

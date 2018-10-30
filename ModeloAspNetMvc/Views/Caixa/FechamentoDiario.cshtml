@@ -143,7 +143,7 @@
                 }
             </table>
         </div>
-        <div class="pager">
+        <div class="pager">            
             @Html.PagedListPager((IPagedList)Model.Fechamentos, page => Url.Action("FechamentoDiario", new { page }))
         </div>
     </div>

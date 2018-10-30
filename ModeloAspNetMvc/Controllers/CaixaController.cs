@@ -12,7 +12,8 @@ namespace ModeloAspNetMvc.Controllers
     public class CaixaController : Controller
     {
         private ICaixaAppService _caixaAppService;
-        private static  readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly ILog log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+        private const int paginaTamanho = 10;
 
         public CaixaController(ICaixaAppService caixaAppService)
         {
@@ -35,38 +36,43 @@ namespace ModeloAspNetMvc.Controllers
         public ActionResult FechamentoDiario(TelaFechamentoDiarioModel model, int? page)
         {
             log.Info("Buscar Fechametnos Diarios");
+            var pageNumber = page ?? 1;
+            var totalLinhas = 0;
 
             IEnumerable<FechamentoDiarioModel> dados = new List<FechamentoDiarioModel>();
-            
+
             if (string.IsNullOrEmpty(model.FiltroDia))
             {
-                dados = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentos());
+                totalLinhas = _caixaAppService.CountObterFechamentos();
+                dados = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentos(pageNumber, paginaTamanho));
             }
             else
             {
-                dados = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentosDoDia(model.FiltroDia));
+                totalLinhas = _caixaAppService.CountObterFechamentosDoDia(model.FiltroDia);
+                dados = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentosDoDia(model.FiltroDia, pageNumber, paginaTamanho));
             }
 
-            var pageNumber = page ?? 1;
-            int paginaTamanho = 15;
+
+            IPagedList<FechamentoDiarioModel> pageOrders = new StaticPagedList<FechamentoDiarioModel>(dados, pageNumber, paginaTamanho, totalLinhas);            
 
             return View(new TelaFechamentoDiarioModel
             {
-                Fechamentos = dados.ToPagedList(pageNumber, paginaTamanho),
-                FiltroDia = model.FiltroDia
+                Fechamentos = pageOrders,
+                FiltroDia = model.FiltroDia,
+                TotalItemCount = 10
             });
         }
 
         public ActionResult ExibirEntradasDoDia(int id)
         {
-            var entradas = _caixaAppService.ObterEntradasDoCaixa(id);            
+            var entradas = _caixaAppService.ObterEntradasDoCaixa(id);
 
-            return PartialView("_MovimentosDoCaixa",  Mapper.Map<IEnumerable<MovimentoCaixaModel>>(entradas));
+            return PartialView("_MovimentosDoCaixa", Mapper.Map<IEnumerable<MovimentoCaixaModel>>(entradas));
         }
 
         public ActionResult ExibirSaidasDoDia(int id)
         {
-            var saidas = _caixaAppService.ObterSaidasDoCaixa(id);            
+            var saidas = _caixaAppService.ObterSaidasDoCaixa(id);
 
             return PartialView("_MovimentosDoCaixa", Mapper.Map<IEnumerable<MovimentoCaixaModel>>(saidas));
         }

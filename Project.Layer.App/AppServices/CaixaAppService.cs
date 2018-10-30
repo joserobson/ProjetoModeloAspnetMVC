@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
 using Project.Layer.App.AppModels.Caixa;
 using Project.Layer.Domain.Entities;
 using Project.Layer.Domain.Enums;
@@ -18,9 +19,9 @@ namespace Project.Layer.App.AppServices
             this._caixaRepository = caixaRepository;
         }
 
-        public IEnumerable<FechamentoDiarioAppModel> ObterFechamentosDoDia(string diaFechamento)
+        public IEnumerable<FechamentoDiarioAppModel> ObterFechamentosDoDia(string diaFechamento, int currentPage, int maxRows)
         {
-            var fechamentos = this._caixaRepository.ObterFechamentosDoDia(diaFechamento);
+            var fechamentos = this._caixaRepository.ObterFechamentosDoDia(diaFechamento, currentPage, maxRows);
 
             if (!fechamentos.Any())
             {
@@ -58,11 +59,10 @@ namespace Project.Layer.App.AppServices
             return saldo > 0 ? "Caixa Passando" : "Caixa Faltando";
         }
 
-
-        public IEnumerable<FechamentoDiarioAppModel> ObterFechamentos()
+        public IEnumerable<FechamentoDiarioAppModel> ObterFechamentosComDetalhes()
         {
 
-            var fechamentos = this._caixaRepository.ObterFechamentos();
+            var fechamentos = this._caixaRepository.ObterFechamentos(1, 2000);
 
             if (!fechamentos.Any())
             {
@@ -80,7 +80,37 @@ namespace Project.Layer.App.AppServices
                 ValorDaSaida = f.ValorDeSaida,
                 ValorEntrada = f.ValorDeEntrada,
                 Saldo = f.Saldo,
-                Status = StatusCaixa(f.Saldo)                             
+                Status = StatusCaixa(f.Saldo),
+                Entradas = Mapper.Map<IEnumerable<MovimentoCaixaAppModel>>(f.MovimentosDoCaixa.Where(m=>m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Entrada)),
+                Saidas = Mapper.Map<IEnumerable<MovimentoCaixaAppModel>>(f.MovimentosDoCaixa.Where(m => m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Saida))
+
+            }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
+        }
+
+
+
+        public IEnumerable<FechamentoDiarioAppModel> ObterFechamentos(int currentPage, int maxRows)
+        {
+
+            var fechamentos = this._caixaRepository.ObterFechamentos(currentPage, maxRows);
+
+            if (!fechamentos.Any())
+            {
+                return new List<FechamentoDiarioAppModel>();
+            }
+
+            return fechamentos.Select(f => new FechamentoDiarioAppModel
+            {
+                Id = f.Id,
+                CaixaInicioDoDia = f.CaixaInicioDoDia,
+                DiaFechamento = f.DiaFechamento,
+                CaixaFinalDoDia = f.CaixaFinalDoDia,
+                Funcionario = f.Funcionario,
+                ValorDaRetirada = f.Retirada,
+                ValorDaSaida = f.ValorDeSaida,
+                ValorEntrada = f.ValorDeEntrada,
+                Saldo = f.Saldo,
+                Status = StatusCaixa(f.Saldo),
             }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
         }
 
@@ -158,6 +188,16 @@ namespace Project.Layer.App.AppServices
             }
 
             return movimentos;
+        }
+
+        public int CountObterFechamentos()
+        {
+            return this._caixaRepository.CountObterFechamentos();
+        }
+
+        public int CountObterFechamentosDoDia(string filtroDia)
+        {
+            return this._caixaRepository.CountObterFechamentosDoDia(filtroDia);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace ModeloAspNetMvc.Controllers
         [Route("ObterFechamentos")]
         public IHttpActionResult ObterFechamentos()
         {            
-            var dados = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentos());
+            var dados = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentosComDetalhes());
 
             return Ok(dados);
         }
