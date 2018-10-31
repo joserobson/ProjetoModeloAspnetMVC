@@ -30,7 +30,7 @@ namespace Project.Layer.Data.Repositories
         {
             return this.GetAll().Where(c => c.DiaFechamento.Equals(diaFechamento))
                 .OrderByDescending(c => c.Id).Skip((currentPage - 1) * maxRows).Take(maxRows)
-                .Select(c => new Caixa
+                .ToList().Select(c => new Caixa
                 {
                     CaixaInicioDoDia = c.CaixaInicioDoDia,
                     DiaFechamento = c.DiaFechamento,

@@ -19,12 +19,7 @@ namespace Project.Layer.App.AppServices
         public VendaAppService(IResumoFinanceiroMensalRepository resumoFinanceiroMensalRepository)
         {
             _resumoFinanceiroMensalRepository = resumoFinanceiroMensalRepository;
-        }       
-
-        public VendaAppService()
-        {
-
-        }
+        }               
 
         public void CadastrarResumosFinanceiros(IEnumerable<ResumoFinanceiroMensalAppModel> resumosAppModel)
         {

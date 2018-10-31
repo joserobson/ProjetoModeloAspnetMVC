@@ -12,7 +12,7 @@ namespace ModeloAspNetMvc.Controllers
     {
 
         private ICaixaAppService _caixaAppService;
-       
+
 
         public CaixaApiController(ICaixaAppService caixaAppService)
         {
@@ -26,18 +26,61 @@ namespace ModeloAspNetMvc.Controllers
             var appServiceModel = Mapper.Map<FechamentoDiarioAppModel>(model);
             this._caixaAppService.CadastrarFechamentoDiario(appServiceModel);
 
-            //checar se existem mais de 100 registros e fazer o delete dos mais antigos
-
             return Ok();
         }
 
         [HttpGet]
         [Route("ObterFechamentos")]
-        public IHttpActionResult ObterFechamentos()
-        {            
-            var dados = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentosComDetalhes());
+        public IHttpActionResult ObterFechamentos(int? numeroPagina, int? tamanhoPagina, string diaFechamento)
+        {
+            IEnumerable<FechamentoDiarioModel> resultado;
 
-            return Ok(dados);
+            if (string.IsNullOrEmpty(diaFechamento))
+            {
+                resultado = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentos(numeroPagina.Value, tamanhoPagina.Value));
+            }
+            else
+            {
+                resultado = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentosDoDia(diaFechamento, numeroPagina.Value, tamanhoPagina.Value));
+            }
+
+            return Ok(resultado);
+        }
+
+        [HttpGet]
+        [Route("ObterCountFechamentos")]
+        public IHttpActionResult ObterCountFechamentos(string diaFechamento)
+        {
+            int count = 0;
+
+            if (string.IsNullOrEmpty(diaFechamento))
+            {
+                count = _caixaAppService.CountObterFechamentos();
+            }
+            else
+            {
+                count = _caixaAppService.CountObterFechamentosDoDia(diaFechamento);
+            }
+
+            return Ok(count);
+        }
+
+        [HttpGet]
+        [Route("ObterEntradasDoDia")]
+        public IHttpActionResult ObterEntradasDoDia(int idFechamento)
+        {
+            var entradas = _caixaAppService.ObterEntradasDoCaixa(idFechamento);
+            var model = Mapper.Map<IEnumerable<MovimentoCaixaModel>>(entradas);
+            return Ok(model);
+        }
+
+        [HttpGet]
+        [Route("ObterRetiradasDoDia")]
+        public IHttpActionResult ObterRetiradasDoDia(int idFechamento)
+        {
+            var retiradas = _caixaAppService.ObterSaidasDoCaixa(idFechamento);
+            var model = Mapper.Map<IEnumerable<MovimentoCaixaModel>>(retiradas);
+            return Ok(model);
         }
 
         public IEnumerable<string> Get()

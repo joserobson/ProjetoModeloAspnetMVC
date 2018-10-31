@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using AutoMapper;
+using Project.CrossCutting.Exceptions;
 using Project.Layer.App.AppModels.Caixa;
+using Project.Layer.App.Helper;
 using Project.Layer.Domain.Entities;
 using Project.Layer.Domain.Enums;
 using Project.Layer.Domain.Interfaces.Repositories;
@@ -81,13 +84,11 @@ namespace Project.Layer.App.AppServices
                 ValorEntrada = f.ValorDeEntrada,
                 Saldo = f.Saldo,
                 Status = StatusCaixa(f.Saldo),
-                Entradas = Mapper.Map<IEnumerable<MovimentoCaixaAppModel>>(f.MovimentosDoCaixa.Where(m=>m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Entrada)),
+                Entradas = Mapper.Map<IEnumerable<MovimentoCaixaAppModel>>(f.MovimentosDoCaixa.Where(m => m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Entrada)),
                 Saidas = Mapper.Map<IEnumerable<MovimentoCaixaAppModel>>(f.MovimentosDoCaixa.Where(m => m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Saida))
 
             }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
         }
-
-
 
         public IEnumerable<FechamentoDiarioAppModel> ObterFechamentos(int currentPage, int maxRows)
         {
@@ -113,8 +114,7 @@ namespace Project.Layer.App.AppServices
                 Status = StatusCaixa(f.Saldo),
             }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
         }
-
-
+        
         public IEnumerable<MovimentoCaixaAppModel> ObterEntradasDoCaixa(int id)
         {
             var movimentos = this._caixaRepository.GetAll().Where(c => c.Id.Equals(id)).FirstOrDefault().MovimentosDoCaixa;
@@ -135,7 +135,7 @@ namespace Project.Layer.App.AppServices
                 Descricao = m.Descricao,
                 Valor = m.Valor
             });
-        }
+        }      
 
         public void CadastrarFechamentoDiario(FechamentoDiarioAppModel appServiceModel)
         {

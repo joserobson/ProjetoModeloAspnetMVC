@@ -65,14 +65,17 @@
     <Compile Include="AppModels\RespostaAppViewModel.cs" />
     <Compile Include="AppModels\Venda\ResumoDebitosAReceberAppModel.cs" />
     <Compile Include="AppModels\Venda\ResumoFinanceiroMensalAppModel.cs" />
+    <Compile Include="AppServices\CaixaAppRestService.cs" />
     <Compile Include="AppServices\CaixaAppService.cs" />
     <Compile Include="AppServices\ClienteAppService.cs" />
+    <Compile Include="AppServices\ICaixaAppRestService.cs" />
     <Compile Include="AppServices\ICaixaAppService.cs" />
     <Compile Include="AppServices\IClienteAppService.cs" />
     <Compile Include="AppServices\IVendaAppService.cs" />
     <Compile Include="AppServices\VendaAppService.cs" />
     <Compile Include="AutoMapper\AppMappingProfile.cs" />
     <Compile Include="Helper\HttpServiceHelper.cs" />
+    <Compile Include="HttpServices\HttpServiceCaixa.cs" />
     <Compile Include="HttpServices\HttpServiceGlobal.cs" />
     <Compile Include="HttpServices\HttpServiceVenda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

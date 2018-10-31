@@ -12,7 +12,7 @@ namespace ModeloAspNetMvc
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Venda", action = "DebitosAReceber", id = UrlParameter.Optional }
+                defaults: new { controller = "Caixa", action = "FechamentoDiario", id = UrlParameter.Optional }
             );
         }
     }

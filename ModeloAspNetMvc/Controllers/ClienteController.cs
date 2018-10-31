@@ -12,12 +12,7 @@ namespace ModeloAspNetMvc.Controllers
         public ClienteController(IClienteAppService clienteAppService)
         {
             this._clienteAppService = clienteAppService;
-        }
-
-        public ClienteController()
-        {
-
-        }
+        }       
 
         // GET: Cliente
         public ActionResult Index()
