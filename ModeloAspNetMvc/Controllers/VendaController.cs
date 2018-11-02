@@ -36,9 +36,11 @@ namespace ModeloAspNetMvc.Controllers
 
             if (viewModel == null)
             {
-                viewModel = new ResumoDebitosAReceberModel { TotalEmDebitosAReceber = "0", TotalEmDebitosRetroativos = "0", FiltroDataReferencia = dataReferencia, ValorTotal = "0" };                
+                viewModel = new ResumoDebitosAReceberModel { TotalEmDebitosAReceber = "0", TotalEmDebitosRetroativos = "0", ValorTotal = "0" };                
             }
-            
+
+            viewModel.FiltroDataReferencia = dataReferencia;
+
             return View(viewModel);
         }
 

@@ -52,16 +52,16 @@ namespace ModeloAspNetMvc.Controllers
             });
         }
 
-        public ActionResult ExibirEntradasDoDia(int id)
+        public ActionResult ExibirEntradasDoDia(string diaFechamento)
         {
-            var entradas = _caixaAppService.ObterEntradasDoCaixa(id);
+            var entradas = _caixaAppService.ObterEntradasDoCaixa(diaFechamento);
 
             return PartialView("_MovimentosDoCaixa", Mapper.Map<IEnumerable<MovimentoCaixaModel>>(entradas));
         }
 
-        public ActionResult ExibirSaidasDoDia(int id)
+        public ActionResult ExibirSaidasDoDia(string diaFechamento)
         {
-            var saidas = _caixaAppService.ObterRetiradasDoCaixa(id);
+            var saidas = _caixaAppService.ObterRetiradasDoCaixa(diaFechamento);
 
             return PartialView("_MovimentosDoCaixa", Mapper.Map<IEnumerable<MovimentoCaixaModel>>(saidas));
         }

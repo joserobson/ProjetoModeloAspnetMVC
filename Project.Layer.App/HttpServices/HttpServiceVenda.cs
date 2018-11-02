@@ -17,7 +17,7 @@ namespace Project.Layer.App.HttpServices
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return client.GetAsync($"ObterResumoDebitosAReceber?dataReferencia={dataDeReferencia}").Result;
+                return client.GetAsync($"ObterDebitosAReceber?dataReferencia={dataDeReferencia}").Result;
             }
         }
 
@@ -30,7 +30,7 @@ namespace Project.Layer.App.HttpServices
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return client.GetAsync($"ObterResumoFinanceiroDoMes?mesAno={mesAno}").Result;
+                return client.GetAsync($"ObterResumoFinanceiroMensal?mesAno={mesAno}").Result;
             }
         }
     }

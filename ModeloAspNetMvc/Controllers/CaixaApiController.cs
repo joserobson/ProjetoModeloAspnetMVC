@@ -66,19 +66,19 @@ namespace ModeloAspNetMvc.Controllers
         }
 
         [HttpGet]
-        [Route("ObterEntradasPorFechamentoId")]
-        public IHttpActionResult ObterEntradasDoDia(int idFechamento)
+        [Route("ObterEntradasDoCaixaPorDia")]
+        public IHttpActionResult ObterEntradasDoDia(string diaFechamento)
         {
-            var entradas = _caixaAppService.ObterEntradasDoCaixa(idFechamento);
+            var entradas = _caixaAppService.ObterEntradasDoCaixa(diaFechamento);
             var model = Mapper.Map<IEnumerable<MovimentoCaixaModel>>(entradas);
             return Ok(model);
         }
 
         [HttpGet]
-        [Route("ObterRetiradasPorFechamentoId")]
-        public IHttpActionResult ObterRetiradasDoDia(int idFechamento)
+        [Route("ObterRetiradasDoCaixaPorDia")]
+        public IHttpActionResult ObterRetiradasDoDia(string diaFechamento)
         {
-            var retiradas = _caixaAppService.ObterSaidasDoCaixa(idFechamento);
+            var retiradas = _caixaAppService.ObterSaidasDoCaixa(diaFechamento);
             var model = Mapper.Map<IEnumerable<MovimentoCaixaModel>>(retiradas);
             return Ok(model);
         }

@@ -8,6 +8,10 @@ namespace Project.Layer.App.AppServices
         IEnumerable<FechamentoDiarioAppModel> ObterFechamentos(int currentPage, int maxRows);
         IEnumerable<MovimentoCaixaAppModel> ObterEntradasDoCaixa(int id);
         IEnumerable<MovimentoCaixaAppModel> ObterSaidasDoCaixa(int id);
+
+        IEnumerable<MovimentoCaixaAppModel> ObterEntradasDoCaixa(string diaFechamento);
+        IEnumerable<MovimentoCaixaAppModel> ObterSaidasDoCaixa(string diaFechamento);
+
         void CadastrarFechamentoDiario(FechamentoDiarioAppModel appServiceModel);
         IEnumerable<FechamentoDiarioAppModel> ObterFechamentosDoDia(string diaFechamento, int currentPage, int maxRows);
         int CountObterFechamentos();

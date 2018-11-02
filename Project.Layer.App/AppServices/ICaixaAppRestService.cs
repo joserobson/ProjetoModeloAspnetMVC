@@ -5,9 +5,9 @@ namespace Project.Layer.App.AppServices
 {
     public interface ICaixaAppRestService
     {
-        IEnumerable<MovimentoCaixaAppModel> ObterEntradasDoCaixa(int id);
+        IEnumerable<MovimentoCaixaAppModel> ObterEntradasDoCaixa(string diaFechamento);
 
-        IEnumerable<MovimentoCaixaAppModel> ObterRetiradasDoCaixa(int id);
+        IEnumerable<MovimentoCaixaAppModel> ObterRetiradasDoCaixa(string diaFechamento);
 
         IEnumerable<FechamentoDiarioAppModel> ObterFechamentosDoDia(string diaFechamento, int currentPage, int maxRows);
 

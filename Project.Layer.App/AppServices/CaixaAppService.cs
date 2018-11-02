@@ -196,5 +196,27 @@ namespace Project.Layer.App.AppServices
         {
             return this._caixaRepository.CountObterFechamentosDoDia(filtroDia);
         }
+
+        public IEnumerable<MovimentoCaixaAppModel> ObterEntradasDoCaixa(string diaFechamento)
+        {
+            var movimentos = this._caixaRepository.GetAll().FirstOrDefault(c => c.DiaFechamento.Equals(diaFechamento)).MovimentosDoCaixa;
+
+            return movimentos.Where(m => m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Entrada).Select(m => new MovimentoCaixaAppModel
+            {
+                Descricao = m.Descricao,
+                Valor = m.Valor
+            });
+        }
+
+        public IEnumerable<MovimentoCaixaAppModel> ObterSaidasDoCaixa(string diaFechamento)
+        {
+            var movimentos = this._caixaRepository.GetAll().FirstOrDefault(c => c.DiaFechamento.Equals(diaFechamento)).MovimentosDoCaixa;
+
+            return movimentos.Where(m => m.TipoMovimentoCaixa == (int)ETipoMovimentoCaixa.Saida).Select(m => new MovimentoCaixaAppModel
+            {
+                Descricao = m.Descricao,
+                Valor = m.Valor
+            });
+        }
     }
 }

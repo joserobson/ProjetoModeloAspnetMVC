@@ -34,7 +34,7 @@ namespace Project.Layer.App.HttpServices
             }
         }
 
-        public static HttpResponseMessage ObterEntradasDoDia(int idFechamento)
+        public static HttpResponseMessage ObterEntradasDoDia(string diaFechamento)
         {
             using (var client = new HttpClient())
             {
@@ -42,11 +42,11 @@ namespace Project.Layer.App.HttpServices
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return client.GetAsync($"ObterEntradasDoDia?idFechamento={idFechamento}").Result;
+                return client.GetAsync($"ObterEntradasDoCaixaPorDia?diaFechamento={diaFechamento}").Result;
             }
         }
 
-        public static HttpResponseMessage ObterRetiradasDoDia(int idFechamento)
+        public static HttpResponseMessage ObterRetiradasDoDia(string diaFechamento)
         {
             using (var client = new HttpClient())
             {
@@ -54,7 +54,7 @@ namespace Project.Layer.App.HttpServices
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return client.GetAsync($"ObterRetiradasDoDia?idFechamento={idFechamento}").Result;
+                return client.GetAsync($"ObterRetiradasDoCaixaPorDia?diaFechamento={diaFechamento}").Result;
             }
         }
     }

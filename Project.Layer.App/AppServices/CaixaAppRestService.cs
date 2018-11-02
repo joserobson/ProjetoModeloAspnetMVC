@@ -28,11 +28,11 @@ namespace Project.Layer.App.AppServices
         }
 
 
-        public IEnumerable<MovimentoCaixaAppModel> ObterEntradasDoCaixa(int id)
+        public IEnumerable<MovimentoCaixaAppModel> ObterEntradasDoCaixa(string diaFechamento)
         {
             IEnumerable<MovimentoCaixaAppModel> entradas = new List<MovimentoCaixaAppModel>();
 
-            var httpResponse = HttpServices.HttpServiceCaixa.ObterEntradasDoDia(id);
+            var httpResponse = HttpServices.HttpServiceCaixa.ObterEntradasDoDia(diaFechamento);
             if (httpResponse.IsSuccessStatusCode)
             {
                 entradas = httpResponse.Content.ReadAsAsync<IEnumerable<MovimentoCaixaAppModel>>().Result;
@@ -47,11 +47,11 @@ namespace Project.Layer.App.AppServices
         }
 
 
-        public IEnumerable<MovimentoCaixaAppModel> ObterRetiradasDoCaixa(int id)
+        public IEnumerable<MovimentoCaixaAppModel> ObterRetiradasDoCaixa(string diaFechamento)
         {
             IEnumerable<MovimentoCaixaAppModel> entradas = new List<MovimentoCaixaAppModel>();
 
-            var httpResponse = HttpServices.HttpServiceCaixa.ObterRetiradasDoDia(id);
+            var httpResponse = HttpServices.HttpServiceCaixa.ObterRetiradasDoDia(diaFechamento);
             if (httpResponse.IsSuccessStatusCode)
             {
                 entradas = httpResponse.Content.ReadAsAsync<IEnumerable<MovimentoCaixaAppModel>>().Result;
