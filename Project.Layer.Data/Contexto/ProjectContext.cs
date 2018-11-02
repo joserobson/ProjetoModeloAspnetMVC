@@ -60,6 +60,13 @@ namespace Project.Layer.Data.Contexto
             modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.MesAno).HasColumnName("mes_ano");
 
 
+            modelBuilder.Entity<ResumoDebitosAReceber>().ToTable("tb_resumo_debitos_receber");
+            modelBuilder.Entity<ResumoDebitosAReceber>().Property(x => x.Id).HasColumnName("id");
+            modelBuilder.Entity<ResumoDebitosAReceber>().Property(x => x.ValorAReceber).HasColumnName("valor_receber");
+            modelBuilder.Entity<ResumoDebitosAReceber>().Property(x => x.ValorRetroativo).HasColumnName("valor_retroativo");
+            modelBuilder.Entity<ResumoDebitosAReceber>().Property(x => x.DataReferencia).HasColumnName("data_referencia");
+
+
             base.OnModelCreating(modelBuilder);
         }
 

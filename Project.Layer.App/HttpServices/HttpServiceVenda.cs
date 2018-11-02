@@ -7,7 +7,7 @@ namespace Project.Layer.App.HttpServices
 {
     public class HttpServiceVenda
     {
-        private static string UriString = WebConfigurationManager.AppSettings["Endereco_WebService_Venda"].ToString();
+        private static string UriString = WebConfigurationManager.AppSettings["URI_VENDA"].ToString();
 
         public static HttpResponseMessage ObterDebitosDosClientesAReceber(string dataDeReferencia)
         {
@@ -17,7 +17,7 @@ namespace Project.Layer.App.HttpServices
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return client.GetAsync($"api/LevantamentoFinanceiro/CalcularDebitoDeClientes?dataReferencia={dataDeReferencia}").Result;
+                return client.GetAsync($"ObterResumoDebitosAReceber?dataReferencia={dataDeReferencia}").Result;
             }
         }
 
@@ -30,7 +30,7 @@ namespace Project.Layer.App.HttpServices
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return client.GetAsync($"api/LevantamentoFinanceiro/ObterResumoFinanceiroDoMes?mesAno={mesAno}").Result;
+                return client.GetAsync($"ObterResumoFinanceiroDoMes?mesAno={mesAno}").Result;
             }
         }
     }

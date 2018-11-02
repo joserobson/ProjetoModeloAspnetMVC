@@ -1,6 +1,6 @@
-﻿namespace Project.Layer.App.AppModels.Venda
+﻿namespace Project.Layer.Domain.Entities
 {
-    public class ResumoDebitosAReceberAppModel
+    public class ResumoDebitosAReceber: BaseEntity
     {
         public decimal ValorRetroativo { get; set; }
 

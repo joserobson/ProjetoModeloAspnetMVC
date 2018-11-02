@@ -71,7 +71,9 @@
     <Compile Include="AppServices\ICaixaAppRestService.cs" />
     <Compile Include="AppServices\ICaixaAppService.cs" />
     <Compile Include="AppServices\IClienteAppService.cs" />
+    <Compile Include="AppServices\IVendaAppRestService.cs" />
     <Compile Include="AppServices\IVendaAppService.cs" />
+    <Compile Include="AppServices\VendaAppRestService.cs" />
     <Compile Include="AppServices\VendaAppService.cs" />
     <Compile Include="AutoMapper\AppMappingProfile.cs" />
     <Compile Include="Helper\HttpServiceHelper.cs" />

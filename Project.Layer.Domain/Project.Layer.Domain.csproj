@@ -50,11 +50,13 @@
     <Compile Include="Entities\MovimentoDoCaixa.cs" />
     <Compile Include="Entities\Operadora.cs" />
     <Compile Include="Entities\Pais.cs" />
+    <Compile Include="Entities\ResumoDebitosAReceber.cs" />
     <Compile Include="Entities\ResumoFinanceiroMensal.cs" />
     <Compile Include="Entities\Telefone.cs" />
     <Compile Include="Entities\TipoEndereco.cs" />
     <Compile Include="Enums\ETipoMovimentoCaixa.cs" />
     <Compile Include="Interfaces\Repositories\ICaixaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IResumoDebitosAReceberRepository.cs" />
     <Compile Include="Interfaces\Repositories\IResumoFinanceiroMensalRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepository.cs" />
     <Compile Include="Interfaces\DomainServices\IDomainService.cs" />

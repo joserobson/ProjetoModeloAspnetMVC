@@ -8,6 +8,9 @@ namespace Project.Layer.App.AppServices
         ResumoFinanceiroMensalAppModel ObterResumoFinanceiroMensal(string mesAno);
 
         void CadastrarResumosFinanceiros(IEnumerable<ResumoFinanceiroMensalAppModel> resumosAppModel);
+
         ResumoDebitosAReceberAppModel ObterResumoDebitosAReceber(string dataReferencia);
+
+        void CadastrarResumoDebitosAReceber(IEnumerable<ResumoDebitosAReceberAppModel> debitosAReceber);
     }
 }

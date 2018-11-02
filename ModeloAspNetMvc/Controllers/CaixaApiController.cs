@@ -66,7 +66,7 @@ namespace ModeloAspNetMvc.Controllers
         }
 
         [HttpGet]
-        [Route("ObterEntradasDoDia")]
+        [Route("ObterEntradasPorFechamentoId")]
         public IHttpActionResult ObterEntradasDoDia(int idFechamento)
         {
             var entradas = _caixaAppService.ObterEntradasDoCaixa(idFechamento);
@@ -75,7 +75,7 @@ namespace ModeloAspNetMvc.Controllers
         }
 
         [HttpGet]
-        [Route("ObterRetiradasDoDia")]
+        [Route("ObterRetiradasPorFechamentoId")]
         public IHttpActionResult ObterRetiradasDoDia(int idFechamento)
         {
             var retiradas = _caixaAppService.ObterSaidasDoCaixa(idFechamento);

@@ -9,9 +9,9 @@ namespace ModeloAspNetMvc.Controllers
     public class VendaController : Controller
     {
 
-        private readonly IVendaAppService _vendaAppService;
+        private readonly IVendaAppRestService _vendaAppService;
 
-        public VendaController(IVendaAppService vendaAppService)
+        public VendaController(IVendaAppRestService vendaAppService)
         {
             _vendaAppService = vendaAppService;
         }
@@ -33,8 +33,12 @@ namespace ModeloAspNetMvc.Controllers
 
             var appModel = _vendaAppService.ObterResumoDebitosAReceber(dataReferencia);
             var viewModel = Mapper.Map<ResumoDebitosAReceberModel>(appModel);
-            viewModel.FiltroDataReferencia = dataReferencia;
 
+            if (viewModel == null)
+            {
+                viewModel = new ResumoDebitosAReceberModel { TotalEmDebitosAReceber = "0", TotalEmDebitosRetroativos = "0", FiltroDataReferencia = dataReferencia, ValorTotal = "0" };                
+            }
+            
             return View(viewModel);
         }
 

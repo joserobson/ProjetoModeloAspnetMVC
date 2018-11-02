@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using AutoMapper;
-using Project.CrossCutting.Exceptions;
 using Project.Layer.App.AppModels.Caixa;
-using Project.Layer.App.Helper;
 using Project.Layer.Domain.Entities;
 using Project.Layer.Domain.Enums;
 using Project.Layer.Domain.Interfaces.Repositories;

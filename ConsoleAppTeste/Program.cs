@@ -2,7 +2,6 @@
 using Project.Layer.App.AppModels.Venda;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -34,7 +33,7 @@ namespace ConsoleAppTeste
 
                 //TestResumoFinanceiroRest();
 
-                ObterFechamentosSqlServer();
+                //ObterFechamentosSqlServer();
 
 
 
@@ -53,7 +52,7 @@ namespace ConsoleAppTeste
 
             var resumo = new ResumoFinanceiroMensalAppModel
             {
-                MesAno = "10/2015"
+                MesAnoReferencia = "10/2015"
             };
 
             var resumos = new List<ResumoFinanceiroMensalAppModel>() { resumo };
@@ -61,6 +60,30 @@ namespace ConsoleAppTeste
 
             await SalvarResumosFinanceiros(resumos);
 
+
+        }
+
+        private async static void TestCadastrarResumoDebitosAReceberRest()
+        {
+
+            var resumo = new ResumoDebitosAReceberAppModel
+            {
+                DataReferencia = "01/10/1985",
+                ValorAReceber = 10000,
+                ValorRetroativo = 50
+            };
+
+            var resumos = new List<ResumoDebitosAReceberAppModel>() { resumo };
+
+
+            await SalvarResumosDebitosAReceber(resumos);
+
+        }
+
+        private async static void TestObterResumoDebitosAReceberRest()
+        {
+            var dataReferencia = "01/10/2018";
+            await GetResumoDebitosARecerAsync(dataReferencia);
 
         }
 
@@ -174,6 +197,27 @@ namespace ConsoleAppTeste
                 }
             }
 
+        }
+
+        static async Task<HttpResponseMessage> SalvarResumosDebitosAReceber(IEnumerable<ResumoDebitosAReceberAppModel> resumos)
+        {
+            HttpResponseMessage response = await client.PostAsJsonAsync(
+                "api/vendaApi/CadastrarResumoDebitosAReceber", resumos);
+            response.EnsureSuccessStatusCode();
+
+            // return URI of the created resource.
+            return response;
+        }
+
+        static async Task<IEnumerable<ResumoDebitosAReceberAppModel>> GetResumoDebitosARecerAsync(string dataReferencia)
+        {
+            IEnumerable<ResumoDebitosAReceberAppModel> resumos = null;
+            HttpResponseMessage response = await client.GetAsync($"api/vendaApi/ObterResumoDebitosAReceber?datareferencia={dataReferencia}");
+            if (response.IsSuccessStatusCode)
+            {
+                resumos = await response.Content.ReadAsAsync<IEnumerable<ResumoDebitosAReceberAppModel>>();
+            }
+            return resumos;
         }
 
     }
