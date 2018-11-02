@@ -29,7 +29,28 @@ namespace Project.Layer.App.AppServices
 
                 resumoMensal = Mapper.Map<ResumoFinanceiroMensal>(itemResumo);
 
-                _resumoFinanceiroMensalRepository.Adicionar(resumoMensal);
+                var resumoEmBanco = _resumoFinanceiroMensalRepository.Get(r => r.MesAnoReferencia == itemResumo.MesAnoReferencia).FirstOrDefault();
+
+                if(resumoEmBanco != null)
+                {
+                    resumoEmBanco.ValorDasPrestacoesRecebidasNoCartao = resumoMensal.ValorDasPrestacoesRecebidasNoCartao;
+                    resumoEmBanco.ValorDasPrestacoesRecebidasNoCheque = resumoMensal.ValorDasPrestacoesRecebidasNoCheque;
+                    resumoEmBanco.ValorDasPrestacoesRecebidasNoDinheiro = resumoMensal.ValorDasPrestacoesRecebidasNoCartao;
+                    resumoEmBanco.ValorDasVendasAPrazo = resumoMensal.ValorDasVendasAPrazo;
+                    resumoEmBanco.ValorDasVendasAVista = resumoMensal.ValorDasVendasAVista;
+                    resumoEmBanco.ValorDosPagsRecebidosAVistaNoCartao = resumoMensal.ValorDosPagsRecebidosAVistaNoCartao;
+                    resumoEmBanco.ValorDosPagsRecebidosAVistaNoCheque = resumoMensal.ValorDosPagsRecebidosAVistaNoCheque;
+                    resumoEmBanco.ValorDosPagsRecebidosAVistaNoDinheiro = resumoMensal.ValorDosPagsRecebidosAVistaNoDinheiro;
+                    resumoEmBanco.ValorTotalDosPagsRecebidosAVista = resumoMensal.ValorTotalDosPagsRecebidosAVista;
+                    resumoEmBanco.ValorTotalEmPagamentosRecebidos = resumoMensal.ValorTotalEmPagamentosRecebidos;
+                    resumoEmBanco.ValorTotalEmPrestacoesRecebidas = resumoMensal.ValorTotalEmPrestacoesRecebidas;
+                    resumoEmBanco.ValorTotalEmVendas = resumoMensal.ValorTotalEmVendas;
+                }
+                else
+                {
+                    _resumoFinanceiroMensalRepository.Adicionar(resumoMensal);
+                }
+                
             }
 
             _resumoFinanceiroMensalRepository.SalvarTodos();
@@ -57,7 +78,18 @@ namespace Project.Layer.App.AppServices
 
                 resumoMensal = Mapper.Map<ResumoDebitosAReceber>(itemResumo);
 
-                _resumoDebitosAReceberRepository.Adicionar(resumoMensal);
+                var resumoEmBanco = _resumoDebitosAReceberRepository.Get(r => r.DataReferencia == itemResumo.DataReferencia).FirstOrDefault();
+
+                if (resumoEmBanco != null)
+                {
+                    resumoEmBanco.ValorAReceber = resumoMensal.ValorAReceber;
+                    resumoEmBanco.ValorRetroativo = resumoMensal.ValorRetroativo;
+                }
+                else
+                {
+                    _resumoDebitosAReceberRepository.Adicionar(resumoMensal);
+                }
+
             }
 
             _resumoDebitosAReceberRepository.SalvarTodos();
