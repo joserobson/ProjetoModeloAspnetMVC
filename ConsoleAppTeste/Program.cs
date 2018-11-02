@@ -35,6 +35,7 @@ namespace ConsoleAppTeste
 
                 //ObterFechamentosSqlServer();
 
+                TestCadastrarResumoDebitosAReceberRest();
 
 
             }
@@ -76,7 +77,9 @@ namespace ConsoleAppTeste
             var resumos = new List<ResumoDebitosAReceberAppModel>() { resumo };
 
 
-            await SalvarResumosDebitosAReceber(resumos);
+            var response = await SalvarResumosDebitosAReceber(resumos);
+
+            var sucess = response.IsSuccessStatusCode;
 
         }
 

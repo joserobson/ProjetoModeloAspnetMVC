@@ -3,6 +3,7 @@ using ModeloAspNetMvc.Models.Caixa;
 using ModeloAspNetMvc.Models.Venda;
 using Project.Layer.App.AppModels.Caixa;
 using Project.Layer.App.AppModels.Venda;
+using Project.Layer.Domain.Entities;
 
 namespace ModeloAspNetMvc.AutoMapper
 {
@@ -36,6 +37,12 @@ namespace ModeloAspNetMvc.AutoMapper
                 .ForMember(model => model.TotalEmDebitosAReceber, appModel => appModel.MapFrom(o => o.ValorAReceber.ToString("C2")))
                 .ForMember(model => model.TotalEmDebitosRetroativos, appModel => appModel.MapFrom(o => o.ValorRetroativo.ToString("C2")))
                 .ForMember(model => model.ValorTotal, appModel => appModel.MapFrom(o => (o.ValorAReceber + o.ValorRetroativo).ToString("C2")));
+
+
+            CreateMap<ResumoDebitosAReceberAppModel, ResumoDebitosAReceber>().ReverseMap();
+
+
+            CreateMap<ResumoFinanceiroMensal, ResumoFinanceiroMensalAppModel>().ReverseMap();
         }
     }
 }

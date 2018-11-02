@@ -605,6 +605,10 @@
       <Project>{dd73dba0-84a3-44c6-852c-a43c344b2601}</Project>
       <Name>Project.Layer.App</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Project.Layer.Domain\Project.Layer.Domain.csproj">
+      <Project>{D3138729-4848-424B-B3C7-1CD8DF9DD2EC}</Project>
+      <Name>Project.Layer.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

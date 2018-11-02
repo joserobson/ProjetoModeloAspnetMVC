@@ -8,7 +8,7 @@ namespace Project.Layer.Data.Repositories
     {
         public ResumoFinanceiroMensal ObterResumoMensal(string mesAno)
         {
-            return this.GetAll().FirstOrDefault(r => r.MesAno.Equals(mesAno));
+            return this.GetAll().FirstOrDefault(r => r.MesAnoReferencia.Equals(mesAno));
         }
     }
 }

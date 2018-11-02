@@ -22,6 +22,12 @@ namespace ModeloAspNetMvc.Controllers
             var mesAno = DateTime.Now.ToString("MM/yyyy");
             var balancoAppModel = _vendaAppService.ObterResumoFinanceiroMensal(mesAno);
             var balancoModel = Mapper.Map<ResumoFinanceiroMensalModel>(balancoAppModel);
+
+            if (balancoModel == null)
+            {
+                balancoModel = new ResumoFinanceiroMensalModel();
+            }
+
             balancoModel.FiltroMesAno = mesAno;
 
             return View(balancoModel);
@@ -52,6 +58,11 @@ namespace ModeloAspNetMvc.Controllers
 
             var viewModel = Mapper.Map<ResumoDebitosAReceberModel>(appModel);
 
+            if (viewModel == null)
+            {
+                viewModel = new ResumoDebitosAReceberModel();
+            }
+
             return Json(viewModel);
 
         }
@@ -61,6 +72,11 @@ namespace ModeloAspNetMvc.Controllers
         {
             var appModel = _vendaAppService.ObterResumoFinanceiroMensal(mesAno);
             var viewModel = Mapper.Map<ResumoFinanceiroMensalModel>(appModel);
+
+            if (viewModel == null)
+            {
+                viewModel = new ResumoFinanceiroMensalModel();
+            }
 
             return Json(viewModel);
 

@@ -57,7 +57,7 @@ namespace Project.Layer.Data.Contexto
             modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorTotalEmPrestacoesRecebidas).HasColumnName("valor_total_prestacoes");
             modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorTotalEmPagamentosRecebidos).HasColumnName("valor_total_pags_recebidos");
             modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.ValorTotalEmVendas).HasColumnName("valor_total_vendas");
-            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.MesAno).HasColumnName("mes_ano");
+            modelBuilder.Entity<ResumoFinanceiroMensal>().Property(x => x.MesAnoReferencia).HasColumnName("mes_ano");
 
 
             modelBuilder.Entity<ResumoDebitosAReceber>().ToTable("tb_resumo_debitos_receber");

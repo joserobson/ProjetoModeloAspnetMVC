@@ -40,7 +40,7 @@ namespace Project.Layer.App.AppServices
                 ValorEntrada = f.ValorDeEntrada,
                 Saldo = f.Saldo,
                 Status = StatusCaixa(f.Saldo)
-            }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
+            }).ToList();
         }
 
         public string StatusCaixa(string saldoParam)

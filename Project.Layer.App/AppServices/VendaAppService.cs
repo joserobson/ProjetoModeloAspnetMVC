@@ -37,7 +37,7 @@ namespace Project.Layer.App.AppServices
 
         public ResumoFinanceiroMensalAppModel ObterResumoFinanceiroMensal(string mesAno)
         {
-            var resumoModel = _resumoFinanceiroMensalRepository.GetAll().FirstOrDefault(r => r.MesAno.Equals(mesAno));
+            var resumoModel = _resumoFinanceiroMensalRepository.GetAll().FirstOrDefault(r => r.MesAnoReferencia.Equals(mesAno));
             return Mapper.Map<ResumoFinanceiroMensalAppModel>(resumoModel);         
         }
 
@@ -45,30 +45,7 @@ namespace Project.Layer.App.AppServices
         {
 
             var resumoModel = _resumoDebitosAReceberRepository.ObterResumoDebitoAReceber(dataReferencia);
-            return Mapper.Map<ResumoDebitosAReceberAppModel>(resumoModel);
-
-            //            var resumo = new ResumoDebitosAReceberAppModel();
-            //;
-            //            //validar data
-            //            DateTime dataValida;
-            //            if (!DateTime.TryParse(dataReferencia, out dataValida))
-            //            {
-            //                throw new BusinessException("Data Referência Inválida");
-            //            }
-
-            //            //chamar http service
-            //            var httpResponse = HttpServices.HttpServiceVenda.ObterDebitosDosClientesAReceber(dataReferencia);
-            //            if (httpResponse.IsSuccessStatusCode)
-            //            {
-            //                resumo = httpResponse.Content.ReadAsAsync<ResumoDebitosAReceberAppModel>().Result;
-            //            }
-            //            else
-            //            {
-            //                var erro = HttpServiceHelper.ObterMensagemHttpResponse(httpResponse);
-            //                throw new BusinessException(erro);
-            //            }
-
-            //            return resumo;
+            return Mapper.Map<ResumoDebitosAReceberAppModel>(resumoModel);            
         }
 
         public void CadastrarResumoDebitosAReceber(IEnumerable<ResumoDebitosAReceberAppModel> debitosAReceber)
@@ -83,7 +60,7 @@ namespace Project.Layer.App.AppServices
                 _resumoDebitosAReceberRepository.Adicionar(resumoMensal);
             }
 
-            _resumoFinanceiroMensalRepository.SalvarTodos();
+            _resumoDebitosAReceberRepository.SalvarTodos();
         }
     }
 }
