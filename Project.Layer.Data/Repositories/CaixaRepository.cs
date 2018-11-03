@@ -9,7 +9,7 @@ namespace Project.Layer.Data.Repositories
     {
         public IEnumerable<Caixa> ObterFechamentos(int currentPage, int maxRows)
         {
-            return this.GetAll()
+            return this.GetAll().Where(c => !string.IsNullOrEmpty(c.Funcionario))
                 .OrderByDescending(c => c.Id).Skip((currentPage - 1) * maxRows).Take(maxRows)
                 .ToList().Select(c => new Caixa
                 {
@@ -28,7 +28,7 @@ namespace Project.Layer.Data.Repositories
 
         public IEnumerable<Caixa> ObterFechamentosDoDia(string diaFechamento, int currentPage, int maxRows)
         {
-            return this.GetAll().Where(c => c.DiaFechamento.Equals(diaFechamento))
+            return this.GetAll().Where(c => c.DiaFechamento.Equals(diaFechamento) && !string.IsNullOrEmpty(c.Funcionario))
                 .OrderByDescending(c => c.Id).Skip((currentPage - 1) * maxRows).Take(maxRows)
                 .ToList().Select(c => new Caixa
                 {
@@ -47,12 +47,12 @@ namespace Project.Layer.Data.Repositories
 
         public int CountObterFechamentosDoDia(string diaFechamento)
         {
-            return this.GetAll().Count(c => c.DiaFechamento.Equals(diaFechamento));                                
+            return this.GetAll().Count(c => c.DiaFechamento.Equals(diaFechamento));
         }
 
         public int CountObterFechamentos()
         {
-            return this.GetAll().Count();                
+            return this.GetAll().Count();
         }
     }
 }
