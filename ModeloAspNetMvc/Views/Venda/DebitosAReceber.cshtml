@@ -11,7 +11,6 @@
                 <h3>Vendas</h3>
                 <ol class="breadcrumb breadcrumb-simple">
                     <li><a href="#">ComFacil</a></li>
-                    <li><a href="#">Vendas</a></li>
                     <li class="active">Débitos a Receber</li>
                 </ol>
             </div>
@@ -21,21 +20,21 @@
 
 
 <section class="card box-block">
-    <div class="card-block">        
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FiltroDataReferencia)
-                        @Html.TextBox("FiltroDataReferencia", Model.FiltroDataReferencia, new { @class = "form-control", @id = "filtroDataReferencia" })
-                    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FiltroDataReferencia)
+                    @Html.TextBox("FiltroDataReferencia", Model.FiltroDataReferencia, new { @class = "form-control", @id = "filtroDataReferencia" })
                 </div>
+            </div>
 
-                <div class="col-md-9 text-right">
-                    <div class="form-group">
-                        <input type="button" value="Consultar" class="btn btn-primary" onclick="buscarDebitos()" />
-                    </div>
+            <div class="col-md-9 text-right">
+                <div class="form-group">
+                    <input type="button" value="Consultar" class="btn btn-primary" id="btnBuscarDebitos" />
                 </div>
-            </div>        
+            </div>
+        </div>
     </div>
 
     <div class="card-block">
@@ -55,7 +54,7 @@
 
                 <tr>
                     <td>
-                        @Html.TextBoxFor(model=>model.TotalEmDebitosRetroativos, new { @readonly = "readonly"})
+                        @Html.TextBoxFor(model => model.TotalEmDebitosRetroativos, new { @readonly = "readonly" })
                     </td>
                     <td>
                         @Html.TextBoxFor(model => model.TotalEmDebitosAReceber, new { @readonly = "readonly" })
@@ -72,34 +71,42 @@
 
 <script type="text/javascript">
 
-    function buscarDebitos() {
+    $(function () {
 
-        abrirLoading();
 
-        var parametro = {
-            dataReferencia: $('#filtroDataReferencia').val()
-        };
-        $.ajax(
-        {
-            type: 'POST',
-            url: "@Url.Action("BuscarDebitosAReceber", "Venda")",            
-            data: parametro,                        
-            success: function (data) {
-
-                $("#TotalEmDebitosRetroativos").val(data.TotalEmDebitosRetroativos);
-                $("#TotalEmDebitosAReceber").val(data.TotalEmDebitosAReceber);
-                $("#ValorTotal").val(data.ValorTotal);
-
-                fecharLoading();
-            },
-            error: function (error) {
-
-                fecharLoading();
-
-                alert(error);
-            }
+        $('#filtroDataReferencia').datepicker({
+            language: "pt-BR"
         });
 
-    }
 
+        $('#btnBuscarDebitos').click(function () {
+
+            abrirLoading();
+
+            var parametro = {
+                dataReferencia: $('#filtroDataReferencia').val()
+            };
+            $.ajax(
+                {
+                    type: 'POST',
+                    url: "@Url.Action("BuscarDebitosAReceber", "Venda")",
+                    data: parametro,
+                    success: function (data) {
+
+                        $("#TotalEmDebitosRetroativos").val(data.TotalEmDebitosRetroativos);
+                        $("#TotalEmDebitosAReceber").val(data.TotalEmDebitosAReceber);
+                        $("#ValorTotal").val(data.ValorTotal);
+
+                        fecharLoading();
+                    },
+                    error: function (error) {
+
+                        fecharLoading();
+
+                        alert(error);
+                    }
+                });
+
+        });
+    });
 </script>
