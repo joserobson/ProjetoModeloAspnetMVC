@@ -111,7 +111,7 @@ namespace Project.Layer.App.AppServices
                 Status = StatusCaixa(f.Saldo),
             }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
         }
-        
+
         public IEnumerable<MovimentoCaixaAppModel> ObterEntradasDoCaixa(int id)
         {
             var movimentos = this._caixaRepository.GetAll().Where(c => c.Id.Equals(id)).FirstOrDefault().MovimentosDoCaixa;
@@ -132,10 +132,18 @@ namespace Project.Layer.App.AppServices
                 Descricao = m.Descricao,
                 Valor = m.Valor
             });
-        }      
+        }
 
         public void CadastrarFechamentoDiario(FechamentoDiarioAppModel appServiceModel)
         {
+
+            var caixaCadastrado = _caixaRepository.Get(c => c.DiaFechamento.Equals(appServiceModel.DiaFechamento)).FirstOrDefault();
+
+            if (caixaCadastrado != null)
+            {
+                _caixaRepository.Excluir(caixaCadastrado);
+            }
+
             var caixa = new Caixa
             {
                 CaixaInicioDoDia = appServiceModel.CaixaInicioDoDia,
@@ -149,7 +157,6 @@ namespace Project.Layer.App.AppServices
             };
 
             caixa.MovimentosDoCaixa = GerarMovimentosDoCaixa(appServiceModel.Saidas, appServiceModel.Entradas, caixa);
-
 
             this._caixaRepository.Adicionar(caixa);
 
