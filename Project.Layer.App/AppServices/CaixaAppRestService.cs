@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Project.CrossCutting.Exceptions;
 using Project.Layer.App.AppModels.Caixa;
 using Project.Layer.App.Helper;
@@ -17,6 +18,24 @@ namespace Project.Layer.App.AppServices
             if (httpResponse.IsSuccessStatusCode)
             {
                 entradas = httpResponse.Content.ReadAsAsync<IEnumerable<FechamentoDiarioAppModel>>().Result;
+            }
+            else
+            {
+                var erro = HttpServiceHelper.ObterMensagemHttpResponse(httpResponse);
+                throw new BusinessException(erro);
+            }
+
+            return entradas;
+        }
+
+        public async Task<IEnumerable<FechamentoDiarioAppModel>> ObterFechamentosDoDiaAsync(string diaFechamento, int currentPage, int maxRows)
+        {
+            IEnumerable<FechamentoDiarioAppModel> entradas = new List<FechamentoDiarioAppModel>();
+
+            var httpResponse = HttpServices.HttpServiceCaixa.ObterFechamentos(currentPage, maxRows, diaFechamento);
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                entradas = await httpResponse.Content.ReadAsAsync<IEnumerable<FechamentoDiarioAppModel>>();
             }
             else
             {
@@ -81,6 +100,42 @@ namespace Project.Layer.App.AppServices
             }
 
             return count;
+        }
+
+        public IEnumerable<FechamentoDiarioAppModel> ObterFechamentosDoMes(string mesAno)
+        {
+            IEnumerable<FechamentoDiarioAppModel> entradas = new List<FechamentoDiarioAppModel>();
+
+            var httpResponse = HttpServices.HttpServiceCaixa.ObterFechamentosDoMes(mesAno);
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                entradas = httpResponse.Content.ReadAsAsync<IEnumerable<FechamentoDiarioAppModel>>().Result;
+            }
+            else
+            {
+                var erro = HttpServiceHelper.ObterMensagemHttpResponse(httpResponse);
+                throw new BusinessException(erro);
+            }
+
+            return entradas;
+        }
+
+        public async Task<IEnumerable<FechamentoDiarioAppModel>> ObterFechamentosDoMesAsync(string mesAno)
+        {
+            IEnumerable<FechamentoDiarioAppModel> entradas = new List<FechamentoDiarioAppModel>();
+
+            var httpResponse = HttpServices.HttpServiceCaixa.ObterFechamentosDoMes(mesAno);
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                entradas = await httpResponse.Content.ReadAsAsync<IEnumerable<FechamentoDiarioAppModel>>();
+            }
+            else
+            {
+                var erro = HttpServiceHelper.ObterMensagemHttpResponse(httpResponse);
+                throw new BusinessException(erro);
+            }
+
+            return entradas;
         }
     }
 }

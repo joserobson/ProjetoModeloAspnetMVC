@@ -57,5 +57,17 @@ namespace Project.Layer.App.HttpServices
                 return client.GetAsync($"ObterRetiradasDoCaixaPorDia?diaFechamento={diaFechamento}").Result;
             }
         }
+
+        internal static HttpResponseMessage ObterFechamentosDoMes(string mesAno)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(UriString);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                return client.GetAsync($"ObterFechamentosDoMes?mesAno={mesAno}").Result;
+            }
+        }
     }
 }

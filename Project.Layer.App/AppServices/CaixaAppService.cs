@@ -225,5 +225,29 @@ namespace Project.Layer.App.AppServices
                 Valor = m.Valor
             });
         }
+
+        public IEnumerable<FechamentoDiarioAppModel> ObterFechamentosDoMes(string mesAno)
+        {            
+            var fechamentos = this._caixaRepository.ObterFechamentosDoMes(mesAno);
+
+            if (!fechamentos.Any())
+            {
+                return new List<FechamentoDiarioAppModel>();
+            }
+
+            return fechamentos.Select(f => new FechamentoDiarioAppModel
+            {
+                Id = f.Id,
+                CaixaInicioDoDia = f.CaixaInicioDoDia,
+                DiaFechamento = f.DiaFechamento,
+                CaixaFinalDoDia = f.CaixaFinalDoDia,
+                Funcionario = f.Funcionario,
+                ValorDaRetirada = f.Retirada,
+                ValorDaSaida = f.ValorDeSaida,
+                ValorEntrada = f.ValorDeEntrada,
+                Saldo = f.Saldo,
+                Status = StatusCaixa(f.Saldo),
+            }).OrderByDescending(c => DateTime.Parse(c.DiaFechamento)).ToList();
+        }
     }
 }
