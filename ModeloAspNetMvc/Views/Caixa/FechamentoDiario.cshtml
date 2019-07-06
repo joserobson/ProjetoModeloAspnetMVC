@@ -26,7 +26,7 @@
         @using (Html.BeginForm("FechamentoDiario", "Caixa", FormMethod.Get, new { @id = "formPesquisaPedido" }))
         {
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="form-group">
                     @Html.LabelFor(model => model.FiltroDia)
                     @Html.TextBox("FiltroDia", Model.FiltroDia, new { @class = "form-control", @id = "FiltroDia" })
@@ -58,7 +58,7 @@
                         "Value", "Text", Model.Ano), new { @class = "form-control" })
                 </div>
             </div>
-            <div class="col-md-6 text-right">
+            <div class="col-md-4 text-right">
                 <div class="form-group">
                     <input type="submit" value="Consultar" class="btn btn-primary" />
                 </div>
@@ -145,7 +145,7 @@
                 </table>
             </div>
             <div class="pager">
-                @Html.PagedListPager((IPagedList)Model.Fechamentos, page => Url.Action("FechamentoDiario", new { page }))
+                @Html.PagedListPager((IPagedList)Model.Fechamentos, page => Url.Action("FechamentoDiario", new { page, Model.Mes, Model.Ano }))
             </div>
         </div>
     }
