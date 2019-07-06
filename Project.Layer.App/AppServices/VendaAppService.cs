@@ -35,7 +35,7 @@ namespace Project.Layer.App.AppServices
                 {
                     resumoEmBanco.ValorDasPrestacoesRecebidasNoCartao = resumoMensal.ValorDasPrestacoesRecebidasNoCartao;
                     resumoEmBanco.ValorDasPrestacoesRecebidasNoCheque = resumoMensal.ValorDasPrestacoesRecebidasNoCheque;
-                    resumoEmBanco.ValorDasPrestacoesRecebidasNoDinheiro = resumoMensal.ValorDasPrestacoesRecebidasNoCartao;
+                    resumoEmBanco.ValorDasPrestacoesRecebidasNoDinheiro = resumoMensal.ValorDasPrestacoesRecebidasNoDinheiro;
                     resumoEmBanco.ValorDasVendasAPrazo = resumoMensal.ValorDasVendasAPrazo;
                     resumoEmBanco.ValorDasVendasAVista = resumoMensal.ValorDasVendasAVista;
                     resumoEmBanco.ValorDosPagsRecebidosAVistaNoCartao = resumoMensal.ValorDosPagsRecebidosAVistaNoCartao;
