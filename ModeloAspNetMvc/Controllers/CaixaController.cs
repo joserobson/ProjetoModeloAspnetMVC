@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using log4net;
+using ModeloAspNetMvc.ActionFilters;
 using ModeloAspNetMvc.Models.Caixa;
 using PagedList;
 using Project.Layer.App.AppServices;
@@ -12,6 +13,7 @@ using System.Web.Mvc;
 
 namespace ModeloAspNetMvc.Controllers
 {
+    [BasicAuthenticationAttribute]
     public class CaixaController : Controller
     {
         private ICaixaAppRestService _caixaAppService;

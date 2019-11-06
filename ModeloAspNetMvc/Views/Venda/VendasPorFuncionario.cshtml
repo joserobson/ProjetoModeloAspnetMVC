@@ -1,0 +1,170 @@
+﻿@model ModeloAspNetMvc.Models.Venda.VendaPorFuncionarioModel
+
+@{
+    ViewBag.Title = "Vendas Por Funcionário";
+}
+
+<header class="section-header">
+    <div class="tbl">
+        <div class="tbl-row">
+            <div class="tbl-cell">
+                <h3>Venda</h3>
+                <ol class="breadcrumb breadcrumb-simple">
+                    <li><a href="#">ComFacil</a></li>
+                    <li class="active">Vendas Por Funcionário</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<section class="card box-block">
+    <div class="card-block">
+        @using (Html.BeginForm("VendasPorFuncionario", "Venda", FormMethod.Get, new { @id = "formPesquisaVenda" }))
+        {
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DataInicio)
+                    @Html.TextBox("DataInicio", Model.DataInicio, new { @class = "form-control", @id = "DataInicio" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DataFim)
+                    @Html.TextBox("DataFim", Model.DataFim, new { @class = "form-control", @id = "DataFim" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IdFuncionario)
+                    @Html.DropDownListFor(model => Model.IdFuncionario, Model.SelectListFuncionarios, new { @class = "form-control" })
+                </div>
+            </div>            
+            <div class="col-md-4 text-right">
+                <div class="form-group">
+                    <input type="submit" value="Consultar" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>           
+        }
+    </div>
+
+    @*@if (Model.Fechamentos.Any())
+    {
+        <div class="card-block">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <tr class="table-info">
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().DiaFechamento)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaInicioDoDia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().CaixaFinalDoDia)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorEntrada)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaSaida)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Saldo)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().ValorDaRetirada)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Fechamentos.FirstOrDefault().Funcionario)
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.Fechamentos)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DiaFechamento)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CaixaInicioDoDia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CaixaFinalDoDia)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValorEntrada)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValorDaSaida)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Saldo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ValorDaRetirada)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Funcionario)
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" class="anchorEntradas" data-id="@item.DiaFechamento">Entradas</a>
+                            </td>
+                            <td>
+                                <a href="javascript:void(0);" class="anchorSaidas" data-id="@item.DiaFechamento">Saídas</a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="pager">
+                @Html.PagedListPager((IPagedList)Model.Fechamentos, page => Url.Action("FechamentoDiario", new { page, Model.Mes, Model.Ano }))
+            </div>
+        </div>
+    }*@
+</section>
+
+
+<script type="text/javascript">
+    
+
+    $(function () {        
+
+        $('#DataInicio').datepicker({
+            language: "pt-BR"
+        });
+
+        $('#DataFim').datepicker({
+            language: "pt-BR"
+        });
+
+    });
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

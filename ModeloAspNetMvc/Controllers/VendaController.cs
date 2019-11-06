@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
+using ModeloAspNetMvc.ActionFilters;
 using ModeloAspNetMvc.Models.Venda;
 using Project.Layer.App.AppServices;
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace ModeloAspNetMvc.Controllers
 {
+    [BasicAuthenticationAttribute]
     public class VendaController : Controller
     {
 
@@ -94,6 +97,30 @@ namespace ModeloAspNetMvc.Controllers
             }
 
             return View("BalancoMensal", balancoModel);
+        }
+
+        public ActionResult VendasPorFuncionario()
+        {
+            //var mesAno = DateTime.Now.ToString("MM/yyyy");
+            //var balancoAppModel = _vendaAppService.ObterResumoFinanceiroMensal(mesAno);
+            //var balancoModel = Mapper.Map<ResumoFinanceiroMensalModel>(balancoAppModel);
+
+            //if (balancoModel == null)
+            //{
+            //    balancoModel = new ResumoFinanceiroMensalModel();
+            //}
+
+            //balancoModel.FiltroMesAno = mesAno;
+
+            return View(new VendaPorFuncionarioModel{
+                DataInicio = "01/10/2015",
+                DataFim = "01/12/2015",
+                SelectListFuncionarios = new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text = "Jose", Value = "123"},
+                        new SelectListItem{ Text = "Maria", Value = "1321122"},
+                    }                
+            });
         }
     }
 }
