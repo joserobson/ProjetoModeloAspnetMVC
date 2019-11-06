@@ -30,6 +30,16 @@ namespace ModeloAspNetMvc.Controllers
         }
 
         [HttpGet]
+        [Route("ObterFechamentosDoMes")]
+        public IHttpActionResult ObterFechamentosDoMes(string mesAno)
+        {
+            IEnumerable<FechamentoDiarioModel> resultado;                      
+            resultado = Mapper.Map<IEnumerable<FechamentoDiarioModel>>(_caixaAppService.ObterFechamentosDoMes(mesAno));
+
+            return Ok(resultado);
+        }
+
+        [HttpGet]
         [Route("ObterFechamentos")]
         public IHttpActionResult ObterFechamentos(int? numeroPagina, int? tamanhoPagina, string diaFechamento)
         {

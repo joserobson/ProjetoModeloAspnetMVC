@@ -12,5 +12,6 @@ namespace Project.Layer.Domain.Interfaces.Repositories
         int CountObterFechamentosDoDia(string diaFechamento);
 
         int CountObterFechamentos();
+        IEnumerable<Caixa> ObterFechamentosDoMes(string mesAno);
     }
 }

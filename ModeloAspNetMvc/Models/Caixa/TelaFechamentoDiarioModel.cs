@@ -9,6 +9,13 @@ namespace ModeloAspNetMvc.Models.Caixa
         [Display(Name ="Dia do Fechamento")]
         public string FiltroDia { get; set; }
 
+        [Display(Name = "Mês")]
+        public string Mes { get; set; }
+
+
+        [Display(Name = "Ano")]
+        public string Ano { get; set; }
+
         public IEnumerable<FechamentoDiarioModel> Fechamentos { get; set; }
 
         public int PageSize { get; set; }

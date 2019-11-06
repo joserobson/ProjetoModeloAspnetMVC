@@ -25,44 +25,45 @@
     <div class="card-block">
         @using (Html.BeginForm("FechamentoDiario", "Caixa", FormMethod.Get, new { @id = "formPesquisaPedido" }))
         {
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.FiltroDia)
-                        @Html.TextBox("FiltroDia", Model.FiltroDia, new { @class = "form-control", @id = "FiltroDia" })
-                    </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FiltroDia)
+                    @Html.TextBox("FiltroDia", Model.FiltroDia, new { @class = "form-control", @id = "FiltroDia" })
                 </div>
-
-                <div class="col-md-9 text-right">
-                    <div class="form-group">
-                        <input type="submit" value="Consultar" class="btn btn-primary" />
-                    </div>
-                </div>
-
-                @*<div class="form-group">
-                    <div class="input-group date" data-provide="datepicker">
-                        @Html.TextBox("FiltroDia", Model.FiltroDia, new { @class = "form-control", @id = "FiltroDia" })
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-th"></span>
-                        </div>
-                    </div>
-                    </div>*@
-
-                @*<div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.FiltroReferencia)
-                            @Html.EditorFor(model => model.FiltroReferencia, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                    </div>*@
             </div>
-
-            @*<div class="row text-right">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <input type="submit" value="Consultar" class="btn btn-primary" />
-                        </div>
-                    </div>
-                </div>*@
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Mes)
+                    @Html.DropDownListFor(model => Model.Mes, new SelectList(
+                        Enumerable.Range(1, 12)
+                            .Select(r => new
+                            {
+                                Text = new DateTime(2000, r, 1).ToString("MMMM"),
+                                Value = r.ToString()
+                            }),
+                        "Value", "Text", Model.Mes), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Ano)
+                    @Html.DropDownListFor(model => Model.Ano, new SelectList(
+                        Enumerable.Range(2012, 15)
+                            .Select(r => new
+                            {
+                                Text =  r.ToString(),
+                                Value = r.ToString()
+                            }),
+                        "Value", "Text", Model.Ano), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-4 text-right">
+                <div class="form-group">
+                    <input type="submit" value="Consultar" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>           
         }
     </div>
 
@@ -144,7 +145,7 @@
                 </table>
             </div>
             <div class="pager">
-                @Html.PagedListPager((IPagedList)Model.Fechamentos, page => Url.Action("FechamentoDiario", new { page }))
+                @Html.PagedListPager((IPagedList)Model.Fechamentos, page => Url.Action("FechamentoDiario", new { page, Model.Mes, Model.Ano }))
             </div>
         </div>
     }

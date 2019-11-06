@@ -54,5 +54,24 @@ namespace Project.Layer.Data.Repositories
         {
             return this.GetAll().Count();
         }
+
+        public IEnumerable<Caixa> ObterFechamentosDoMes(string mesAno)
+        {
+            return this.GetAll().Where(c => !string.IsNullOrEmpty(c.Funcionario))
+                .Where(c=>c.DiaFechamento.Substring(3,7).Equals(mesAno)).OrderByDescending(c => c.Id)
+                .ToList().Select(c => new Caixa
+                {
+                    CaixaInicioDoDia = c.CaixaInicioDoDia,
+                    DiaFechamento = c.DiaFechamento,
+                    Funcionario = c.Funcionario,
+                    CaixaFinalDoDia = c.CaixaFinalDoDia,
+                    MovimentosDoCaixa = c.MovimentosDoCaixa,
+                    Id = c.Id,
+                    Retirada = c.Retirada,
+                    ValorDeEntrada = c.ValorDeEntrada,
+                    ValorDeSaida = c.ValorDeSaida,
+                    Saldo = c.Saldo
+                }).ToList();
+        }
     }
 }
