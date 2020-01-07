@@ -19,5 +19,7 @@ namespace ModeloAspNetMvc.Models.Venda
         public string ValorDasPrestacoesRecebidasNoCartao { get; set; }
         public string ValorDasPrestacoesRecebidasNoCheque { get; set; }
         public string ValorDasPrestacoesRecebidasNoDinheiro { get; set; }
+
+        public string ValorTotalDasEntradasDeVendaAPrazo { get; set; }
     }
 }

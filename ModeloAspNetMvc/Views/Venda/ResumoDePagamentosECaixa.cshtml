@@ -1,0 +1,262 @@
+﻿@model ModeloAspNetMvc.Models.Venda.ResumoPagamentoCaixaModel
+
+@{
+    ViewBag.Title = "Resumo de Pagamentos e Entradas no Caixa";
+}
+
+<header class="section-header">
+    <div class="tbl">
+        <div class="tbl-row">
+            <div class="tbl-cell">
+                <h3>Vendas</h3>
+                <ol class="breadcrumb breadcrumb-simple">
+                    <li><a href="#">ComFacil</a></li>
+                    <li class="active">Resumo de Pagamentos e Entradas No Caixa</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<section class="card box-block">
+    <div class="card-block">
+        @using (Html.BeginForm("ResumoDePagamentosECaixa", "Venda", FormMethod.Post, new { @id = "formPesquisaPagamentos" }))
+        {
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DataInicio)
+                        @Html.TextBox("DataInicio", Model.DataInicio, new { @class = "form-control", @id = "DataInicio" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DataFim)
+                        @Html.TextBox("DataFim", Model.DataFim, new { @class = "form-control", @id = "DataFim" })
+                    </div>
+                </div>
+
+                <div class="col-md-6 text-right">
+                    <div class="form-group">
+                        <input type="submit" value="Consultar" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        }
+      </div>
+        
+
+    <div class="card-block">
+        <h4>Dados de Pagamento e Caixa no Período Selecionado</h4>
+        <hr />
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.SomaDeTodasAsEntradasNoCaixa, new { @class = "col-sm-4 col-form-label" })
+            <div class="col-md-8">
+                @Html.DisplayFor(model => model.SomaDeTodasAsEntradasNoCaixa)
+            </div>
+        </div>
+
+        <dl class="dl">                        
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SomaDeTodasAsEntradasNoCaixa)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SomaDeTodasAsEntradasNoCaixa)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.QtdDeTodasAsEntradasNoCaixa)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.QtdDeTodasAsEntradasNoCaixa)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SomaDasEntradasInicioDoDia)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SomaDasEntradasInicioDoDia)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.QtdEntradasInicioDoDia)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.QtdEntradasInicioDoDia)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SomaQueEntrouNoCaixa)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SomaQueEntrouNoCaixa)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SomaDosPagamentos)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SomaDosPagamentos)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.QtdDePagamentos)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.QtdDePagamentos)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SomaDosPagamentosNoCartao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SomaDosPagamentosNoCartao)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.QtdPagamentosNoCartao)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.QtdPagamentosNoCartao)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SomaDosPagamentosEmDinheiro)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SomaDosPagamentosEmDinheiro)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SomaDosPagamentosAPrazo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SomaDosPagamentosAPrazo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.QtdPagamentosAPrazo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.QtdPagamentosAPrazo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.QtdPagamentosAVista)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.QtdPagamentosAVista)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SomaDosPagamentosAVista)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SomaDosPagamentosAVista)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DiferencaEntreCaixaEpagamento)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DiferencaEntreCaixaEpagamento)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ConclusaoAposConferencia)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ConclusaoAposConferencia)
+            </dd>
+
+        </dl>
+    </div>    
+</section>
+
+<script type="text/javascript">
+
+
+    $(function () {
+
+        $("#formPesquisaPagamentos").submit(function (e) {
+            $("#loadingDiv").show();
+        });
+
+        $('#DataInicio').datepicker({
+            language: "pt-BR"
+        });
+
+        $('#DataFim').datepicker({
+            language: "pt-BR"
+        });
+
+    });
+
+
+    @*function buscarResumoMensalVendas() {
+
+        var parametro = {
+            mesAno: $('#FiltroMesAno').val()
+        };
+
+        abrirLoading();
+
+        $.ajax(
+        {
+            type: 'POST',
+            url: "@Url.Action("BuscarResumoMensalVendas", "Venda")",
+            data: parametro,
+            success: function (data) {
+
+                $("#ValorTotalEmVendas").val(data.ValorTotalEmVendas);
+                $("#ValorTotalEmPagamentosRecebidos").val(data.ValorTotalEmPagamentosRecebidos);
+                $("#ValorDasVendasAVista").val(data.ValorDasVendasAVista);
+                $("#ValorTotalDosPagsRecebidosAVista").val(data.ValorTotalDosPagsRecebidosAVista);
+
+
+                $("#ValorDosPagsRecebidosAVistaNoCartao").val(data.ValorDosPagsRecebidosAVistaNoCartao);
+                $("#ValorDosPagsRecebidosAVistaNoDinheiro").val(data.ValorDosPagsRecebidosAVistaNoDinheiro);
+                $("#ValorDosPagsRecebidosAVistaNoCheque").val(data.ValorDosPagsRecebidosAVistaNoCheque);
+
+
+                $("#ValorDasVendasAPrazo").val(data.ValorDasVendasAPrazo);
+                $("#ValorTotalEmPrestacoesRecebidas").val(data.ValorTotalEmPrestacoesRecebidas);
+                $("#ValorDasPrestacoesRecebidasNoCartao").val(data.ValorDasPrestacoesRecebidasNoCartao);
+                $("#ValorDasPrestacoesRecebidasNoDinheiro").val(data.ValorDasPrestacoesRecebidasNoDinheiro);
+                $("#ValorDasPrestacoesRecebidasNoCheque").val(data.ValorDasPrestacoesRecebidasNoCheque);
+                $("#ValorTotalDasEntradasDeVendaAPrazo").val(data.ValorTotalDasEntradasDeVendaAPrazo);
+
+                console.log(data);
+
+                fecharLoading();
+
+            },
+            error: function (error) {
+                alert(error);
+
+                fecharLoading();
+            }
+        });
+
+    }*@
+
+</script>

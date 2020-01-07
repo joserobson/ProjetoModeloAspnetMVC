@@ -33,5 +33,29 @@ namespace Project.Layer.App.HttpServices
                 return client.GetAsync($"ObterResumoFinanceiroMensal?mesAno={mesAno}").Result;
             }
         }
+
+        internal static HttpResponseMessage ObterResumoDeVendasPorFuncionario(string dataInicio, string dataFim, string idFuncionario)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(UriString);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                return client.GetAsync($"ObterResumoDeVendasPorFuncionario?dataInicio={dataInicio}&dataFim={dataFim}&idFuncionario={idFuncionario}").Result;
+            }
+        }
+
+        internal static HttpResponseMessage ObterResumoDosPagamentosEEntradasDoCaixa(string dataInicio, string dataFim)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(UriString);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                return client.GetAsync($"ObterResumoDosPagamentosEEntradasDoCaixa?dataInicial={dataInicio}&dataFinal={dataFim}").Result;
+            }
+        }
     }
 }

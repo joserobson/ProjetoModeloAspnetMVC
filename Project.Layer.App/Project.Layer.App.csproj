@@ -53,24 +53,30 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppModels\Caixa\CaixaEntradaAppModel.cs" />
     <Compile Include="AppModels\Caixa\FechamentoDiarioAppModel.cs" />
     <Compile Include="AppModels\Caixa\MovimentoCaixaAppModel.cs" />
+    <Compile Include="AppModels\Funcionario\FuncionarioAppModel.cs" />
     <Compile Include="AppModels\RespostaAppViewModel.cs" />
     <Compile Include="AppModels\Venda\ResumoDebitosAReceberAppModel.cs" />
     <Compile Include="AppModels\Venda\ResumoFinanceiroMensalAppModel.cs" />
+    <Compile Include="AppModels\Venda\ResumoPagamentosCaixaAppModel.cs" />
+    <Compile Include="AppModels\Venda\ResumoVendasPorFuncionarioAppModel.cs" />
     <Compile Include="AppServices\CaixaAppRestService.cs" />
     <Compile Include="AppServices\CaixaAppService.cs" />
     <Compile Include="AppServices\ClienteAppService.cs" />
+    <Compile Include="AppServices\FuncionarioAppService.cs" />
     <Compile Include="AppServices\ICaixaAppRestService.cs" />
     <Compile Include="AppServices\ICaixaAppService.cs" />
     <Compile Include="AppServices\IClienteAppService.cs" />
+    <Compile Include="AppServices\IFuncionarioAppService.cs" />
     <Compile Include="AppServices\IVendaAppRestService.cs" />
     <Compile Include="AppServices\IVendaAppService.cs" />
     <Compile Include="AppServices\VendaAppRestService.cs" />

@@ -42,7 +42,7 @@
             <table class="table table-bordered">
                 <tr class="table-info">
                     <th class="text-center">
-                        <strong style="font-size: 20px;">Vendas: @Html.TextBoxFor(model => model.ValorTotalEmVendas, new { @readonly = "readonly" })</strong>                        
+                        <strong style="font-size: 20px;">Vendas: @Html.TextBoxFor(model => model.ValorTotalEmVendas, new { @readonly = "readonly" })</strong>
                     </th>
                     <th class="text-center"><strong style="font-size: 20px;">Capital: @Html.TextBoxFor(Model => Model.ValorTotalEmPagamentosRecebidos, new { @readonly = "readonly" })</strong></th>
                 </tr>
@@ -64,7 +64,7 @@
                 </tr>
 
                 <tr>
-                    <td rowspan="4"><strong style="font-size: 18px;">À Prazo:</strong> @Html.TextBoxFor(Model => Model.ValorDasVendasAPrazo, new { @readonly = "readonly" })</td>
+                    <td rowspan="5"><strong style="font-size: 18px;">À Prazo:</strong> @Html.TextBoxFor(Model => Model.ValorDasVendasAPrazo, new { @readonly = "readonly" })</td>
                     <td><strong style="font-size: 18px;">Em Prestações:</strong> @Html.TextBoxFor(Model => Model.ValorTotalEmPrestacoesRecebidas, new { @readonly = "readonly" })</td>
                 </tr>
 
@@ -78,6 +78,10 @@
 
                 <tr>
                     <td class="text-center"><strong style="font-size: 16px;">Cheque:</strong>@Html.TextBoxFor(Model => Model.ValorDasPrestacoesRecebidasNoCheque, new { @readonly = "readonly" })</td>
+                </tr>
+
+                <tr>
+                    <td class="text-center"><strong style="font-size: 16px;">Entrada:</strong>@Html.TextBoxFor(Model => Model.ValorTotalDasEntradasDeVendaAPrazo, new { @readonly = "readonly" })</td>
                 </tr>
             </table>
         </div>        
@@ -117,6 +121,7 @@
                 $("#ValorDasPrestacoesRecebidasNoCartao").val(data.ValorDasPrestacoesRecebidasNoCartao);
                 $("#ValorDasPrestacoesRecebidasNoDinheiro").val(data.ValorDasPrestacoesRecebidasNoDinheiro);
                 $("#ValorDasPrestacoesRecebidasNoCheque").val(data.ValorDasPrestacoesRecebidasNoCheque);
+                $("#ValorTotalDasEntradasDeVendaAPrazo").val(data.ValorTotalDasEntradasDeVendaAPrazo);
 
                 console.log(data);
 

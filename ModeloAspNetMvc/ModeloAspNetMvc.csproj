@@ -99,8 +99,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -227,6 +227,8 @@
     <Compile Include="Models\Produto\RelatorioProdutoViewModel.cs" />
     <Compile Include="Models\Venda\ResumoDebitosAReceberModel.cs" />
     <Compile Include="Models\Venda\ResumoFinanceiroMensalModel.cs" />
+    <Compile Include="Models\Venda\ResumoPagamentoCaixaModel.cs" />
+    <Compile Include="Models\Venda\ResumoVendaPorFuncionarioModel.cs" />
     <Compile Include="Models\Venda\VendaPorFuncionarioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -508,6 +510,7 @@
     <Content Include="Views\Venda\DebitosAReceber.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Venda\VendasPorFuncionario.cshtml" />
+    <Content Include="Views\Venda\ResumoDePagamentosECaixa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AppLogs\" />

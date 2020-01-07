@@ -21,6 +21,18 @@ namespace Project.Layer.App.HttpServices
             }
         }
 
+        internal static HttpResponseMessage ObterTodosOsFuncionarios()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(UriString);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                return client.GetAsync($"api/funcionario/BuscarTodosOsFuncionarios").Result;
+            }
+        }
+
         public static HttpResponseMessage ObterClientes(string nome)
         {
             using (var client = new HttpClient())

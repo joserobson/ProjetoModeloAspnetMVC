@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using Project.CrossCutting.Exceptions;
 using Project.Layer.App.AppModels.Venda;
 using Project.Layer.App.Helper;
@@ -23,7 +24,7 @@ namespace Project.Layer.App.AppServices
             }
 
             return resumo;
-        }
+        }       
 
         public ResumoFinanceiroMensalAppModel ObterResumoFinanceiroMensal(string mesAno)
         {
@@ -33,6 +34,43 @@ namespace Project.Layer.App.AppServices
             if (httpResponse.IsSuccessStatusCode)
             {
                 resumo = httpResponse.Content.ReadAsAsync<ResumoFinanceiroMensalAppModel>().Result;
+            }
+            else
+            {
+                var erro = HttpServiceHelper.ObterMensagemHttpResponse(httpResponse);
+                throw new BusinessException(erro);
+            }
+
+            return resumo;
+        }
+
+
+        public IEnumerable<ResumoVendasPorFuncionarioAppModel> ObterResumoDeVendasPorFuncionario(string dataInicio, string dataFim, string idFuncionario)
+        {
+            IEnumerable<ResumoVendasPorFuncionarioAppModel> resumo = null;
+
+            var httpResponse = HttpServices.HttpServiceVenda.ObterResumoDeVendasPorFuncionario(dataInicio, dataFim, idFuncionario);
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                resumo = httpResponse.Content.ReadAsAsync<IEnumerable<ResumoVendasPorFuncionarioAppModel>>().Result;
+            }
+            else
+            {
+                var erro = HttpServiceHelper.ObterMensagemHttpResponse(httpResponse);
+                throw new BusinessException(erro);
+            }
+
+            return resumo;
+        }
+
+        public ResumoPagamentosCaixaAppModel ObterResumoDosPagamentosEEntradasDoCaixa(string dataInicio, string dataFim)
+        {
+            ResumoPagamentosCaixaAppModel resumo = null;
+
+            var httpResponse = HttpServices.HttpServiceVenda.ObterResumoDosPagamentosEEntradasDoCaixa(dataInicio, dataFim);
+            if (httpResponse.IsSuccessStatusCode)
+            {
+                resumo = httpResponse.Content.ReadAsAsync<ResumoPagamentosCaixaAppModel>().Result;
             }
             else
             {

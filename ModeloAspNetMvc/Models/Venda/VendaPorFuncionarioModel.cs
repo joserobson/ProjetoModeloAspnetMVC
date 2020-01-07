@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace ModeloAspNetMvc.Models.Venda
@@ -18,6 +15,9 @@ namespace ModeloAspNetMvc.Models.Venda
         [Display(Name = "Funcionário")]
         public string IdFuncionario { get; set; }
 
-        public IEnumerable<SelectListItem> SelectListFuncionarios { get; set; }
+        public IEnumerable<SelectListItem> SelectListFuncionarios { get; set; } = new List<SelectListItem>();
+
+        public IEnumerable<ResumoVendaPorFuncionarioModel> ResumoDeVendas { get; set; } = new List<ResumoVendaPorFuncionarioModel>();
+
     }
 }

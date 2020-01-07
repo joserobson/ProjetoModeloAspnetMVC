@@ -4,19 +4,22 @@ using ModeloAspNetMvc.Models.Venda;
 using Project.Layer.App.AppServices;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace ModeloAspNetMvc.Controllers
 {
     [BasicAuthenticationAttribute]
-    public class VendaController : Controller
+    public class VendaController : BaseController
     {
 
         private readonly IVendaAppRestService _vendaAppService;
+        private readonly IFuncionarioAppService _funcionarioAppService;
 
-        public VendaController(IVendaAppRestService vendaAppService)
+        public VendaController(IVendaAppRestService vendaAppService, IFuncionarioAppService funcionarioAppService)
         {
             _vendaAppService = vendaAppService;
+            _funcionarioAppService = funcionarioAppService;
         }
 
         // GET: Venda
@@ -45,7 +48,7 @@ namespace ModeloAspNetMvc.Controllers
 
             if (viewModel == null)
             {
-                viewModel = new ResumoDebitosAReceberModel { TotalEmDebitosAReceber = "0", TotalEmDebitosRetroativos = "0", ValorTotal = "0" };                
+                viewModel = new ResumoDebitosAReceberModel { TotalEmDebitosAReceber = "0", TotalEmDebitosRetroativos = "0", ValorTotal = "0" };
             }
 
             viewModel.FiltroDataReferencia = dataReferencia;
@@ -101,26 +104,61 @@ namespace ModeloAspNetMvc.Controllers
 
         public ActionResult VendasPorFuncionario()
         {
-            //var mesAno = DateTime.Now.ToString("MM/yyyy");
-            //var balancoAppModel = _vendaAppService.ObterResumoFinanceiroMensal(mesAno);
-            //var balancoModel = Mapper.Map<ResumoFinanceiroMensalModel>(balancoAppModel);
+            var funcionarios = _funcionarioAppService.ObterTodosOsFuncionarios();                  
 
-            //if (balancoModel == null)
-            //{
-            //    balancoModel = new ResumoFinanceiroMensalModel();
-            //}
-
-            //balancoModel.FiltroMesAno = mesAno;
-
-            return View(new VendaPorFuncionarioModel{
-                DataInicio = "01/10/2015",
-                DataFim = "01/12/2015",
-                SelectListFuncionarios = new List<SelectListItem>
-                    {
-                        new SelectListItem{ Text = "Jose", Value = "123"},
-                        new SelectListItem{ Text = "Maria", Value = "1321122"},
-                    }                
+            return View(new VendaPorFuncionarioModel
+            {
+                DataInicio = $"01/{DateTime.Now.ToString("MM/yyyy")}",
+                DataFim = DateTime.Now.ToString("dd/MM/yyyy"),
+                SelectListFuncionarios = SelectListItemDeFuncionarios()
             });
+        }
+
+        [HttpPost]
+        public ActionResult VendasPorFuncionario(VendaPorFuncionarioModel model)
+        {           
+            var resumo = _vendaAppService.ObterResumoDeVendasPorFuncionario(model.DataInicio, model.DataFim, model.IdFuncionario);
+            model.ResumoDeVendas = Mapper.Map<IEnumerable<ResumoVendaPorFuncionarioModel>>(resumo);
+
+            model.SelectListFuncionarios = SelectListItemDeFuncionarios();            
+
+            return View(model);
+        }
+        
+        private IEnumerable<SelectListItem> SelectListItemDeFuncionarios()
+        {
+            var funcionarios = _funcionarioAppService.ObterTodosOsFuncionarios();
+            var selectListItemFuncionario = new List<SelectListItem>();
+            selectListItemFuncionario.Add(new SelectListItem { Text = "TODOS", Value = "-1" });
+            selectListItemFuncionario.AddRange(funcionarios.Select(f => new SelectListItem
+            {
+                Text = f.Nome,
+                Value = f.Id
+            }));
+
+            return selectListItemFuncionario;
+        }
+
+        public ActionResult ResumoDePagamentosECaixa()
+        {                       
+            return View(new ResumoPagamentoCaixaModel
+            {
+                DataInicio = $"01/{DateTime.Now.ToString("MM/yyyy")}",
+                DataFim = DateTime.Now.ToString("dd/MM/yyyy")
+            });
+        }
+
+        [HttpPost]
+        public ActionResult ResumoDePagamentosECaixa(ResumoPagamentoCaixaModel model)
+        {
+
+            var balancoAppModel = _vendaAppService.ObterResumoDosPagamentosEEntradasDoCaixa(model.DataInicio, model.DataFim);
+            var balancoModel = Mapper.Map<ResumoPagamentoCaixaModel>(balancoAppModel);
+
+            balancoModel.DataInicio = model.DataInicio;
+            balancoModel.DataFim = model.DataFim;
+
+            return View(balancoModel);
         }
     }
 }

@@ -30,6 +30,7 @@ namespace ModeloAspNetMvc.AutoMapper
                 .ForMember(model => model.ValorTotalDosPagsRecebidosAVista, appModel => appModel.MapFrom(o => o.ValorTotalDosPagsRecebidosAVista.ToString("C2")))
                 .ForMember(model => model.ValorTotalEmPagamentosRecebidos, appModel => appModel.MapFrom(o => o.ValorTotalEmPagamentosRecebidos.ToString("C2")))
                 .ForMember(model => model.ValorTotalEmPrestacoesRecebidas, appModel => appModel.MapFrom(o => o.ValorTotalEmPrestacoesRecebidas.ToString("C2")))
+                .ForMember(model => model.ValorTotalDasEntradasDeVendaAPrazo, appModel => appModel.MapFrom(o => o.ValorTotalDasEntradasDeVendaAPrazo.ToString("C2")))
                 .ForMember(model => model.ValorTotalEmVendas, appModel => appModel.MapFrom(o => o.ValorTotalEmVendas.ToString("C2")));
 
 
@@ -43,6 +44,8 @@ namespace ModeloAspNetMvc.AutoMapper
 
 
             CreateMap<ResumoFinanceiroMensal, ResumoFinanceiroMensalAppModel>().ReverseMap();
+
+            CreateMap<ResumoPagamentosCaixaAppModel, ResumoPagamentoCaixaModel>().ReverseMap();
         }
     }
 }

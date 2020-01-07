@@ -4,7 +4,6 @@ using AutoMapper;
 using Project.Layer.App.AppModels.Venda;
 using Project.Layer.Domain.Entities;
 using Project.Layer.Domain.Interfaces.Repositories;
-using System;
 
 namespace Project.Layer.App.AppServices
 {

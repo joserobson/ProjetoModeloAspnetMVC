@@ -14,6 +14,8 @@
         public decimal ValorDasPrestacoesRecebidasNoCartao { get; set; }
         public decimal ValorDasPrestacoesRecebidasNoCheque { get; set; }
         public decimal ValorDasPrestacoesRecebidasNoDinheiro { get; set; }
+
+        public decimal ValorTotalDasEntradasDeVendaAPrazo { get; set; }
         public string MesAnoReferencia { get; set; }
     }
 }
