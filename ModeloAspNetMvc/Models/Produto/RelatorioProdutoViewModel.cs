@@ -11,9 +11,9 @@ namespace ModeloAspNetMvc.Models.Produto
         public string Descricao { get; set; }
 
         [Display(Name = "Estoque")]
-        public int QtdEmEstoque { get; set; }
+        public int Estoque { get; set; }
 
         [Display(Name = "Valor")]
-        public string ValorDeVenda { get; set; }
+        public string Preço { get; set; }
     }
 }

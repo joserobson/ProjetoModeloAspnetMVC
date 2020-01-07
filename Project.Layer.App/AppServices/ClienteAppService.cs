@@ -11,7 +11,7 @@ namespace Project.Layer.App.AppServices
     {
         public IEnumerable<RelatorioClienteAppModel> GerarRelatorio()
         {
-            var httpResponse = HttpServiceGlobal.ObterClientes("PAU");
+            var httpResponse = HttpServiceGlobal.ObterClientesParaRelatorio();
 
             if (!httpResponse.IsSuccessStatusCode)
             {
@@ -19,14 +19,8 @@ namespace Project.Layer.App.AppServices
                 throw new System.Exception(erro);
             }
 
-            var clientes = httpResponse.Content.ReadAsAsync<IEnumerable<ClienteAppModel>>().Result;
-
-            return clientes.Select(c => new RelatorioClienteAppModel
-            {
-                NomeDoCliente = c.Nome,
-                NumeroDaFicha = c.CodigoFicha
-            }).ToList();
-
+            var clientes = httpResponse.Content.ReadAsAsync<IEnumerable<RelatorioClienteAppModel>>().Result;
+            return clientes;
         }
     }
 }

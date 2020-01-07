@@ -70,7 +70,7 @@ namespace ModeloAspNetMvc.Helpers
                 foreach (DataColumn column in dataTable.Columns)
                 {
                     ExcelRange columnCells = workSheet.Cells[workSheet.Dimension.Start.Row, columnIndex, workSheet.Dimension.End.Row, columnIndex];
-                    int maxLength = columnCells.Max(cell => cell.Value.ToString().Count());
+                    int maxLength = columnCells.Max(cell => cell.Value != null ? cell.Value.ToString().Count() : 0);
                     if (maxLength < 150)
                     {
                         workSheet.Column(columnIndex).AutoFit();

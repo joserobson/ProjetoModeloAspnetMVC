@@ -33,7 +33,7 @@ namespace Project.Layer.App.HttpServices
             }
         }
 
-        public static HttpResponseMessage ObterClientes(string nome)
+        public static HttpResponseMessage ObterClientesParaRelatorio()
         {
             using (var client = new HttpClient())
             {
@@ -41,7 +41,7 @@ namespace Project.Layer.App.HttpServices
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return client.GetAsync($"api/cliente/ObterClientes?Nome={nome}").Result;
+                return client.GetAsync($"api/cliente/ObterClientesParaRelatorio").Result;
             }
         }
     }

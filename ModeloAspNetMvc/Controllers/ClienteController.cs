@@ -1,10 +1,12 @@
-﻿using ModeloAspNetMvc.Helpers;
+﻿using ModeloAspNetMvc.ActionFilters;
+using ModeloAspNetMvc.Helpers;
 using Project.Layer.App.AppServices;
 using System.Linq;
 using System.Web.Mvc;
 
 namespace ModeloAspNetMvc.Controllers
 {
+    [BasicAuthenticationAttribute]
     public class ClienteController : Controller
     {
         private IClienteAppService _clienteAppService;

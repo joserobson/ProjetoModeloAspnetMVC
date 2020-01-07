@@ -20,7 +20,7 @@
 
 <section class="card box-block">
     <div class="card-block">
-        @using (Html.BeginForm("GerarRelatorio", "Produto"))
+        @using (Html.BeginForm("GerarRelatorio", "Produto", FormMethod.Post, new { @id="formRelatorioProduto"}))
         {
             <div class="row">
                 <div class="col-md-3">
@@ -33,3 +33,15 @@
     </div>
 </section>
 
+
+<script type="text/javascript">
+
+    //$(function () {
+
+    //    $("#formRelatorioProduto").submit(function (e) {
+    //        abrirLoading();
+    //    });       
+    //});
+
+
+</script>

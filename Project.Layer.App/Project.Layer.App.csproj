@@ -64,6 +64,7 @@
     <Compile Include="AppModels\Caixa\FechamentoDiarioAppModel.cs" />
     <Compile Include="AppModels\Caixa\MovimentoCaixaAppModel.cs" />
     <Compile Include="AppModels\Funcionario\FuncionarioAppModel.cs" />
+    <Compile Include="AppModels\Produto\RelatorioProdutoAppModel.cs" />
     <Compile Include="AppModels\RespostaAppViewModel.cs" />
     <Compile Include="AppModels\Venda\ResumoDebitosAReceberAppModel.cs" />
     <Compile Include="AppModels\Venda\ResumoFinanceiroMensalAppModel.cs" />
@@ -77,13 +78,16 @@
     <Compile Include="AppServices\ICaixaAppService.cs" />
     <Compile Include="AppServices\IClienteAppService.cs" />
     <Compile Include="AppServices\IFuncionarioAppService.cs" />
+    <Compile Include="AppServices\IProdutoAppService.cs" />
     <Compile Include="AppServices\IVendaAppRestService.cs" />
     <Compile Include="AppServices\IVendaAppService.cs" />
+    <Compile Include="AppServices\ProdutoAppService.cs" />
     <Compile Include="AppServices\VendaAppRestService.cs" />
     <Compile Include="AppServices\VendaAppService.cs" />
     <Compile Include="AutoMapper\AppMappingProfile.cs" />
     <Compile Include="Helper\HttpServiceHelper.cs" />
     <Compile Include="HttpServices\HttpServiceCaixa.cs" />
+    <Compile Include="HttpServices\HttpServiceEstoque.cs" />
     <Compile Include="HttpServices\HttpServiceGlobal.cs" />
     <Compile Include="HttpServices\HttpServiceVenda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,9 +99,7 @@
     <None Include="packages.config" />
     <Compile Include="AppModels\Cliente\EnderecoAppModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AppModels\Produto\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Project.CrossCutting.Exceptions\Project.CrossCutting.Exceptions.csproj">
       <Project>{206BCA49-C307-40C1-85D7-8F3C28F4321A}</Project>
